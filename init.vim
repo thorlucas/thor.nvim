@@ -182,6 +182,8 @@ end
 let g:vimwiki_list = [{
 \	'path': '~/Dropbox/Wiki/',
 \	'path_html': '~/Dropbox/Wiki_HTML/',
+\	'template_path': '~/Dropbox/Wiki/Templates',
+\	'template_default': 'default',
 \	'syntax': 'markdown',
 \	'ext': '.md',
 \	'custom_wiki2html': '~/.local/share/nvim/scripts/wiki2html.sh',
@@ -238,7 +240,16 @@ augroup filetype_vim
 " }}
 
 " Vimtex {{
-let g:vimtex_compiler_method = "vimtex-tectonic"
+let g:vimtex_compiler_method = "latexmk"
+let g:vimtex_view_automatic = 1
+let g:vimtex_fold_enabled = 1
+let g:vimtex_format_enabled = 1
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_quickfix_ignore_filters = [
+	\ 'Underfull',
+	\ 'Overfull'
+  \ ]
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 " }}
 

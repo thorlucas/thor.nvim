@@ -36,10 +36,40 @@
 				"convention": "info",
 				"warning": "warning",
 				"error": "error",
-				"fatl": "error"
+				"fatal": "error"
 			},
 			"offsetColumn": 1,
 			"formatLines": 1
+		}
+	},
+	"diagnostic-languageserver.formatFiletypes": {
+		"python": [
+			"black",
+			"isort",
+			"docformatter"
+		]
+	},
+	"diagnostic-languageserver.formatters": {
+		"black": {
+			"command": "black",
+			"args": [
+				"black",
+				"-q",
+				"-"
+			]
+		},
+		"isort": {
+			"command": "isort",
+			"args": [
+				"-q",
+				"-"
+			]
+		},
+		"docformatter": {
+			"command": "docformatter",
+			"args": [
+				"-"
+			]
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": [
