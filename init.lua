@@ -13,4 +13,4 @@ require("modules._appearance")
 -- plugins config
 require("plugins._luatree")
 require("plugins._luadev")
-require("plugins.lsp")
+require("plugins._lsp")
