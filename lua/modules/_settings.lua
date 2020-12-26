@@ -23,6 +23,7 @@ local options = {
 	fillchars = [[eob:\ ,vert:\ ]],
 	list = true,
 	listchars = [[tab:\│\ ]],
+	signcolumn = "yes",
 	
 	-- tab
 	expandtab = false,
