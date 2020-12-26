@@ -1,3 +1,9 @@
+-- This file is for general mappings. Plugin-specific mappings will be in the
+-- respective plugin files. I made the decision to do this becaues it cleanly
+-- separates plugin functionality and allows me to easily find a mapping for a
+-- specific plugin -- and disabling that plugin will also disable the relevant
+-- mappings.
+
 local remap = vim.api.nvim_set_keymap
 
 -- alt + arrow keys -> window switching

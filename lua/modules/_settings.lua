@@ -16,26 +16,22 @@ local options = {
 	wildmenu = true,
 	confirm = true,
 	showmatch = true,
-	
 	-- appearance
 	termguicolors = true,
 	linebreak = true,
 	fillchars = [[eob:\ ,vert:\ ]],
 	list = true,
 	listchars = [[tab:\│\ ]],
-	signcolumn = "yes",
-	
+	signcolumn = "number",
 	-- tab
 	expandtab = false,
 	tabstop = 4,
 	softtabstop = 4,
 	shiftwidth = 4,
 	textwidth = 80,
-	
 	-- timeout
 	timeoutlen = 200,
 	updatetime = 250,
-	
 	-- line numbers
 	number = true,
 	relativenumber = true,

@@ -1,32 +1,13 @@
-vim.cmd [[packadd nvim-lspconfig]]
-vim.cmd [[packadd completion-nvim]]
-vim.cmd [[packadd lsp_extensions.nvim]]
+vim.cmd [[packadd coc.nvim]]
 
--- https://sharksforarms.dev/posts/neovim-rust/
+-- TODO: We're going with coc here because the built in LSP is lacking in many
+-- aspects. I'd like to switch to the built in LSP once it's more fully flushed
+-- out, but I wasn't able to get it looking as pretty or working as nicely as I
+-- was able to get coc working.
 
-local nvim_lsp = require('lspconfig')
-local completion = require('completion')
-local extensions = require('lsp_extensions')
+local remap = vim.api.nvim_set_keymap
 
-vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()]]
-
-vim.cmd [[set completeopt=menuone,noinsert,noselect]]
-vim.cmd [[set shortmess+=c]]
-
-vim.cmd [[inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"]]
-vim.cmd [[inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"]]
-
--- vim.cmd [[autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
--- \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }]]
-
-extensions.inlay_hints({ prefix = '', highlight = 'Comment' })
-
-nvim_lsp.rust_analyzer.setup({ on_attach = completion.on_attach })
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
-)
+-- TODO: There is more to this command: https://github.com/neoclide/coc.nvim
+remap('i', '<Tab>',   [[pumvisible() ? "<C-n>" : "<Tab>"]],   { noremap = true, silent = true, expr = true })
+remap('i', '<S-Tab>', [[pumvisible() ? "<C-p>" : "<S-Tab>"]], { noremap = true, silent = true, expr = true })
+remap('i', '<CR>', [[pumvisible() ? coc#_select_confirm() : "<CR>"]], { noremap = true, silent = true, expr = true })

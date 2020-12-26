@@ -1,12 +1,13 @@
 vim.cmd [[packadd packer.nvim]]
+local use = require('packer').use
 
 return require('packer').startup(function()
 	-- Packer
 	use { 'wbthomason/packer.nvim', opt = true }
-	
+
 	-- Ayu Color Scheme
 	use { 'ayu-theme/ayu-vim', opt = true }
-	
+
 	-- File Tree
 	use {
 		'kyazdani42/nvim-tree.lua',
@@ -17,15 +18,13 @@ return require('packer').startup(function()
 	}
 
 	-- Util
-	use { 'nvim-lua/plenary.nvim' }
+	use { 'nvim-lua/plenary.nvim', opt = true }
+	use { 'bfredl/nvim-luadev', opt = true }
 
 	-- LSP
 	use {
-		'neovim/nvim-lspconfig',
+		'neoclide/coc.nvim',
 		opt = true,
-		requires = {
-			{ 'nvim-lua/lsp_extensions.nvim', opt = true},
-			{ 'nvim-lua/completion-nvim', opt = true},
-		}
+		branch = 'release',
 	}
 end)

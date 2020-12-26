@@ -15,30 +15,11 @@ local plugins = {
     only_setup = false,
     path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/ayu-vim"
   },
-  ["completion-nvim"] = {
-    load_after = {
-      ["nvim-lspconfig"] = true
-    },
+  ["coc.nvim"] = {
     loaded = false,
     only_sequence = false,
     only_setup = false,
-    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/completion-nvim"
-  },
-  ["lsp_extensions.nvim"] = {
-    load_after = {
-      ["nvim-lspconfig"] = true
-    },
-    loaded = false,
-    only_sequence = false,
-    only_setup = false,
-    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/lsp_extensions.nvim"
-  },
-  ["nvim-lspconfig"] = {
-    after = { "lsp_extensions.nvim", "completion-nvim" },
-    loaded = false,
-    only_sequence = false,
-    only_setup = false,
-    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig"
+    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/coc.nvim"
   },
   ["nvim-tree.lua"] = {
     after = { "nvim-web-devicons" },
