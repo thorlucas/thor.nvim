@@ -6,4 +6,4 @@ vim.g.lua_tree_tab_open = 1
 vim.g.lua_tree_git_hl = 1
 vim.g.lua_tree_show_icons = { git = 0, folders = 1, files = 1 }
 
-vim.api.nvim_set_keymap('n', '<C-n>', ':LuaTreeToggle<CR>', { noremap = true, silent = true })
+require('util.map').keymap('n', '<C-n>', ':LuaTreeToggle<CR>')

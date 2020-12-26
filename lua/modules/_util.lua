@@ -5,4 +5,5 @@ source_init = function()
 	end
 end
 
+-- Recompile Packer automatically
 vim.cmd [[autocmd BufWritePost _packer.lua PackerCompile]]
