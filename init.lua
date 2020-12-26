@@ -1,3 +1,5 @@
+_G.thor = {}
+
 -- bootstrap
 require("modules._bootstrap")
 

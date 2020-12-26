@@ -6,9 +6,46 @@ vim.cmd [[packadd nerdcommenter]]
 -- out, but I wasn't able to get it looking as pretty or working as nicely as I
 -- was able to get coc working.
 
-local remap = vim.api.nvim_set_keymap
+local map = require('util.map')
+
+_G.thor.completion = {}
+
+local function check_back_space()
+	local col = vim.fn.col('.') - 1
+	return col <= 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+end
+
+local function pumvisible()
+	return vim.fn.pumvisible() == 1
+end
+
+function _G.thor.completion.tab_completion()
+	if pumvisible() then
+		return map.esc('<C-n>')
+	elseif check_back_space() then
+		return map.esc('<Tab>')
+	else
+		return vim.fn['coc#refresh']()
+	end
+end
+
+function _G.thor.completion.shift_tab_completion()
+	if pumvisible() then
+		return map.esc('<C-p>')
+	else
+		return map.esc('<C-h>')
+	end
+end
+
+function _G.thor.completion.return_completion()
+	if pumvisible() then
+		return vim.fn['coc#_select_confirm']()
+	else
+		return map.esc('<CR>')
+	end
+end
 
 -- TODO: There is more to this command: https://github.com/neoclide/coc.nvim
-remap('i', '<Tab>',   [[pumvisible() ? "<C-n>" : "<Tab>"]],   { noremap = true, silent = true, expr = true })
-remap('i', '<S-Tab>', [[pumvisible() ? "<C-p>" : "<S-Tab>"]], { noremap = true, silent = true, expr = true })
-remap('i', '<CR>', [[pumvisible() ? coc#_select_confirm() : "<CR>"]], { noremap = true, silent = true, expr = true })
+map.keymap('i', '<Tab>',   'v:lua.thor.completion.tab_completion()',       { expr = true })
+map.keymap('i', '<S-Tab>', 'v:lua.thor.completion.shift_tab_completion()', { expr = true })
+map.keymap('i', '<CR>',    'v:lua.thor.completion.return_completion()',    { expr = true })
