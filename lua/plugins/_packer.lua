@@ -27,4 +27,5 @@ return require('packer').startup(function()
 		opt = true,
 		branch = 'release',
 	}
+	use { 'preservim/nerdcommenter', opt = true }
 end)

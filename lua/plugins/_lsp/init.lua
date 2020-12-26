@@ -1,4 +1,5 @@
 vim.cmd [[packadd coc.nvim]]
+vim.cmd [[packadd nerdcommenter]]
 
 -- TODO: We're going with coc here because the built in LSP is lacking in many
 -- aspects. I'd like to switch to the built in LSP once it's more fully flushed
