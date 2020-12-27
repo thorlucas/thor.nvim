@@ -21,6 +21,12 @@ local plugins = {
     only_setup = false,
     path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/coc.nvim"
   },
+  nerdcommenter = {
+    loaded = false,
+    only_sequence = false,
+    only_setup = false,
+    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/nerdcommenter"
+  },
   ["nvim-luadev"] = {
     loaded = false,
     only_sequence = false,
@@ -54,6 +60,12 @@ local plugins = {
     only_sequence = false,
     only_setup = false,
     path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/plenary.nvim"
+  },
+  vimwiki = {
+    loaded = false,
+    only_sequence = false,
+    only_setup = false,
+    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/vimwiki"
   }
 }
 

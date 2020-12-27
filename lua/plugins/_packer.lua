@@ -28,4 +28,7 @@ return require('packer').startup(function()
 		branch = 'release',
 	}
 	use { 'preservim/nerdcommenter', opt = true }
+
+	-- Wiki
+	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }
 end)
