@@ -1,7 +1,7 @@
 -- TODO: We really want to actually move this into the function we put in _coc,
 -- otherwise this takes precedence over the pum stuff
-vim.g.UltiSnipsExpandTrigger = "<Tab>"
-vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
-vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+vim.g.UltiSnipsExpandTrigger = "<leader><Tab>"
+vim.g.UltiSnipsJumpForwardTrigger = "<leader><Tab>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<leader><S-Tab>"
 
 vim.cmd [[packadd ultisnips]]
