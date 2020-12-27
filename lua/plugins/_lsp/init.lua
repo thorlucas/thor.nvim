@@ -49,3 +49,8 @@ end
 map.keymap('i', '<Tab>',   'v:lua.thor.completion.tab_completion()',       { expr = true })
 map.keymap('i', '<S-Tab>', 'v:lua.thor.completion.shift_tab_completion()', { expr = true })
 map.keymap('i', '<CR>',    'v:lua.thor.completion.return_completion()',    { expr = true })
+
+map.keymap('n', 'gd', '<Plug>(coc-definition)',      { noremap = false })
+map.keymap('n', 'gy', '<Plug>(coc-type-definition)', { noremap = false })
+map.keymap('n', 'gi', '<Plug>(coc-implementation)',  { noremap = false })
+map.keymap('n', 'gr', '<Plug>(coc-references)',      { noremap = false })
