@@ -1,4 +1,4 @@
-_G.thor = {}
+_G.plugins = {}
 
 -- bootstrap
 require("modules._bootstrap")

@@ -8,7 +8,7 @@ vim.cmd [[packadd nerdcommenter]]
 
 local map = require('util.map')
 
-_G.thor.completion = {}
+_G.plugins.coc = {}
 
 local function check_back_space()
 	local col = vim.fn.col('.') - 1
@@ -19,7 +19,7 @@ local function pumvisible()
 	return vim.fn.pumvisible() == 1
 end
 
-function _G.thor.completion.tab_completion()
+function _G.plugins.coc.tab_completion()
 	if pumvisible() then
 		return map.esc('<C-n>')
 	elseif check_back_space() then
@@ -29,7 +29,7 @@ function _G.thor.completion.tab_completion()
 	end
 end
 
-function _G.thor.completion.shift_tab_completion()
+function _G.plugins.coc.shift_tab_completion()
 	if pumvisible() then
 		return map.esc('<C-p>')
 	else
@@ -37,7 +37,7 @@ function _G.thor.completion.shift_tab_completion()
 	end
 end
 
-function _G.thor.completion.return_completion()
+function _G.plugins.coc.return_completion()
 	if pumvisible() then
 		return vim.fn['coc#_select_confirm']()
 	else
@@ -46,11 +46,13 @@ function _G.thor.completion.return_completion()
 end
 
 -- TODO: There is more to this command: https://github.com/neoclide/coc.nvim
-map.keymap('i', '<Tab>',   'v:lua.thor.completion.tab_completion()',       { expr = true })
-map.keymap('i', '<S-Tab>', 'v:lua.thor.completion.shift_tab_completion()', { expr = true })
-map.keymap('i', '<CR>',    'v:lua.thor.completion.return_completion()',    { expr = true })
+map.keymap('i', '<Tab>',   'v:lua.plugins.coc.tab_completion()',       { expr = true })
+map.keymap('i', '<S-Tab>', 'v:lua.plugins.coc.shift_tab_completion()', { expr = true })
+map.keymap('i', '<CR>',    'v:lua.plugins.coc.return_completion()',    { expr = true })
 
 map.keymap('n', 'gd', '<Plug>(coc-definition)',      { noremap = false })
 map.keymap('n', 'gy', '<Plug>(coc-type-definition)', { noremap = false })
 map.keymap('n', 'gi', '<Plug>(coc-implementation)',  { noremap = false })
 map.keymap('n', 'gr', '<Plug>(coc-references)',      { noremap = false })
+
+map.keymap('n', '<leader>rn', '<Plug>(coc-rename)', { noremap = false })

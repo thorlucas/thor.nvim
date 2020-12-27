@@ -11,6 +11,7 @@ local apply_options = function(opts)
 end
 
 local options = {
+	hidden = true,
 	foldlevel = 20,
 	foldmethod = "syntax",
 	wildmenu = true,
