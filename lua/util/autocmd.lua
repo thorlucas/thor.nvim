@@ -1,5 +1,10 @@
 local M = {}
 
+-- TODO: I'd like to allow callbacks as well. I think in order to properly do
+-- callbacks we need to set a global function so that it call be called with
+-- v:lua.thor.some_unique_callback_identifier?
+-- Or maybe we just wait until autogroups are fully supported by nvim
+
 function M.autogroup(group_name, definition)
 	vim.cmd('augroup '..group_name)
 	vim.cmd('autocmd!')
