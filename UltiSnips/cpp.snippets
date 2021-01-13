@@ -1,0 +1,33 @@
+snippet namespace "A C++ namespace declaration." b
+namespace $1 {
+
+$0
+
+} // namespace $1
+endsnippet
+
+# TODO:
+# - Add inheritance as a second tabstop. If no class name is typed, the colon disappears.
+# - Add private, public, and protected tabstops. If not used, disappears.
+# - Default destrcutor
+# - $4 whitepsacing if empty
+snippet class "A C++ class declaration." b
+class ${1:Foo} {
+public:
+	$1($3);
+	~$1();
+
+	$4
+
+private:
+	$5
+};$0
+endsnippet
+
+snippet main "C++ main." b
+int main(int argc, char* argv[]) {
+	$0
+
+	return 0;
+}
+endsnippet
