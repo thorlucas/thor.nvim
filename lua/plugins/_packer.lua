@@ -51,4 +51,7 @@ return require('packer').startup(function()
 
 	-- Wiki
 	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }
+
+	-- Goyo
+	use { 'junegunn/goyo.vim', opt = true }
 end)

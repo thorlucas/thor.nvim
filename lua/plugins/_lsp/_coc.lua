@@ -53,4 +53,6 @@ map.keymap('n', 'gy', '<Plug>(coc-type-definition)', { noremap = false })
 map.keymap('n', 'gi', '<Plug>(coc-implementation)',  { noremap = false })
 map.keymap('n', 'gr', '<Plug>(coc-references)',      { noremap = false })
 
-map.keymap('n', '<leader>rn', '<Plug>(coc-rename)', { noremap = false })
+map.keymap('n', '<leader>qf', '<Plug>(coc-fix-current)',    { noremap = false })
+map.keymap('n', '<leader>ac', '<Plug>(coc-fix-codeaction)', { noremap = false })
+map.keymap('n', '<leader>rn', '<Plug>(coc-rename)',         { noremap = false })

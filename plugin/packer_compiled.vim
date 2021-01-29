@@ -61,6 +61,12 @@ local plugins = {
     only_setup = false,
     path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/plenary.nvim"
   },
+  ultisnips = {
+    loaded = false,
+    only_sequence = false,
+    only_setup = false,
+    path = "/Users/thorcorreia/.local/share/nvim/site/pack/packer/opt/ultisnips"
+  },
   vimwiki = {
     loaded = false,
     only_sequence = false,
