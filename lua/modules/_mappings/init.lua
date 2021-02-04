@@ -5,6 +5,7 @@
 -- mappings.
 
 local map = require('util.map')
+local comp = require('modules._mappings._completion')
 
 -- alt + arrow keys -> window switching
 map.keymap('n', '<A-Up>',    '<C-w>k')
@@ -22,3 +23,10 @@ map.keymap('n', '<leader>sv', ':lua source_init()<CR>')
 -- jk -> esc
 map.keymap('i', 'jk', '<esc>')
 map.keymap('v', 'jk', '<esc>')
+
+-- Map delegates should take a parameter that is either a fallback map, or a
+-- callback. They should return the completion, and optionally the options.
+
+map.keymap('i', '<Tab>', comp.expand_or_jump(map.esc("<Tab>")))
+map.keymap('i', '<S-Tab>', comp.jump_back(""))
+map.keymap('i', '<CR>', comp.complete(map.esc("<CR>")))
