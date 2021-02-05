@@ -14,43 +14,39 @@ local function pumvisible()
 	return vim.fn.pumvisible() == 1
 end
 
+local function pumselected()
+	return vim.api.nvim_eval([[empty(v:completed_item)]]) == 0
+end
+
 function M.expand_or_jump(callback)
-	_G.thor.completion._rest_complete = function()
-		if us.expand_or_jump_result() == us.FAILED then
-			-- If no UltiSnips expanded
-			if pumvisible() then
-				-- Navigate the pum
-				return map.esc('<C-n>')
-			elseif coc.can_jump() then
-				-- TODO: Why in the everliving fuck does this not work?
-				return map.esc('<C-j>')
-			else
-				-- Otherwise, do the callback
-				return callback
-			end
+	_G.thor.completion._expand_or_jump = function()
+		if pumselected() then
+			return map.esc('<C-n>')
+		elseif us.can_expand() then
+			return us.expand()
+		elseif pumvisible() then
+			return map.esc('<C-n>')
+		elseif us.can_jump() then
+			return us.jump()
+		elseif coc.can_jump() then
+			-- TODO: Broken
+			return coc.jump()
 		else
-			-- If UltiSnips expanded, do nothing
-			return ""
+			return callback
 		end
 	end
 
-	_G.thor.completion._expand_or_jump = function()
-		-- Try the UltiSnips
-		us.expand_or_jump()
-		return ""
-	end
-
-	local us_complete = '<C-R>=v:lua.thor.completion._expand_or_jump()<CR>'
-	local rest_complete = '<Thor>(_rest_complete)'
-
-	map.keymap('i', rest_complete, 'v:lua.thor.completion._rest_complete()', { expr = true })
-	return us_complete..rest_complete, { noremap = false }
+	return 'v:lua.thor.completion._expand_or_jump()', { expr = true }
 end
 
 function M.jump_back(callback)
 	_G.thor.completion._jump_back = function()
 		if pumvisible() then
 			return map.esc('<C-p>')
+		elseif us.can_jump_back() then
+			return us.jump_back()
+		elseif coc.can_jump_back() then
+			return coc.jump_back()
 		else
 			return callback
 		end

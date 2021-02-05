@@ -13,6 +13,22 @@ function M.can_jump()
 	return vim.fn['coc#jumpable']()
 end
 
+function M.can_jump_back()
+	return vim.fn['coc#jumpable']()
+end
+
+--function M.expand_or_jump()
+	--vim.cmd [[call coc#rpc#request('doKeymap', ['snippets-expand-jump',''])]]
+--end
+
+function M.jump()
+	return map.esc('<C-j>')
+end
+
+function M.jump_back()
+	return map.esc('<C-k>')
+end
+
 map.keymap('n', 'gd', '<Plug>(coc-definition)',      { noremap = false })
 map.keymap('n', 'gy', '<Plug>(coc-type-definition)', { noremap = false })
 map.keymap('n', 'gi', '<Plug>(coc-implementation)',  { noremap = false })

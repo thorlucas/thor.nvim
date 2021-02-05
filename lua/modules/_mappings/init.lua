@@ -28,5 +28,5 @@ map.keymap('v', 'jk', '<esc>')
 -- callback. They should return the completion, and optionally the options.
 
 map.keymap('i', '<Tab>', comp.expand_or_jump(map.esc("<Tab>")))
-map.keymap('i', '<S-Tab>', comp.jump_back(""))
+map.keymap('i', '<S-Tab>', comp.jump_back(map.esc("<C-h>")))
 map.keymap('i', '<CR>', comp.complete(map.esc("<CR>")))

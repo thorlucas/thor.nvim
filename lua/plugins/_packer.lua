@@ -47,7 +47,8 @@ return require('packer').startup(function()
 		branch = 'release',
 	}
 	use { 'preservim/nerdcommenter', opt = true }
-	use { 'SirVer/ultisnips', opt = true }
+	--use { 'SirVer/ultisnips', opt = true }
+	use { '~/Dropbox/Projects/Programming/Vim/ultisnips', opt = true }
 
 	-- Wiki
 	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }

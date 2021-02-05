@@ -1,6 +1,8 @@
 local M = {}
 _G.plugins.ultisnips = {}
 
+local map = require('util.map')
+
 -- TODO: We really want to actually move this into the function we put in _coc,
 -- otherwise this takes precedence over the pum stuff
 vim.g.UltiSnipsExpandTrigger = "<NUL>"
@@ -9,16 +11,28 @@ vim.g.UltiSnipsExpandTrigger = "<NUL>"
 
 vim.cmd [[packadd ultisnips]]
 
-function M.expand_or_jump()
-	vim.cmd [[call UltiSnips#ExpandSnippetOrJump()]]
+function M.can_expand()
+	return vim.fn['UltiSnips#CanExpandSnippet']() == 1
 end
 
-M.FAILED = 0
-M.EXPANDED = 1
-M.JUMPED = 2
+function M.can_jump()
+	return vim.fn['UltiSnips#CanJumpForwards']() == 1
+end
 
-function M.expand_or_jump_result()
-	return vim.g.ulti_expand_or_jump_res
+function M.can_jump_back()
+	return vim.fn['UltiSnips#CanJumpBackwards']() == 1
+end
+
+function M.expand()
+	return map.esc([[<C-R>=UltiSnips#ExpandSnippet()<CR>]])
+end
+
+function M.jump()
+	return map.esc([[<C-R>=UltiSnips#JumpForwards()<CR>]])
+end
+
+function M.jump_back()
+	return map.esc([[<C-R>=UltiSnips#JumpBackwards()<CR>]])
 end
 
 return M
