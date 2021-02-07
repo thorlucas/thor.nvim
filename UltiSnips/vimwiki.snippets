@@ -3,7 +3,7 @@ snippet bb "Bold" wA
 **$1**$0
 endsnippet
 
-snippet ii "Bold" wA
+snippet ii "Italics" wA
 *$1*$0
 endsnippet
 
@@ -19,6 +19,24 @@ snippet time "Hours and minutes" w
 `date +%H:%M`
 endsnippet
 
-snippet log "Log a drug entry" b
-**`date +%H:%M`** ${1:20mg} ${2:drug}, ${3:oral}
+snippet log "Log an entry" b
+**`date +%H:%M`**	${1:${2:200mg} ${3:ibuprofen}, ${4:oral}}
+endsnippet
+
+# TODO: make mL and mg changeable
+snippet pms "Soln uncertainty" w
+(${1:1}±${2:0.1})mL of (${3:10}±${4:1})mg/mL
+endsnippet
+
+snippet pm "Measurement uncertainty"
+(${1:50}±${2:3})${3:mg}
+endsnippet
+
+snippet '\((\d+(?:\.\d+)?)±(\d+(?:\.\d+)?)\)mL of \((\d+(?:\.\d+)?)±(\d+(?:\.\d+)?)\)mg\/mL' "Soln uncertaintiy calc" r
+`!p import math
+na, nb, ua, ub = float(match.group(1)), float(match.group(3)), float(match.group(2)), float(match.group(4))
+n = na * nb
+upa, upb = ua / na, ub / nb
+u = n * math.sqrt( math.pow(upa, 2.0) + math.pow(upb, 2.0) )
+snip.rv = '(%.2f±%.2f)mg' % (n, u)`
 endsnippet
