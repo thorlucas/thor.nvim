@@ -24,9 +24,11 @@ map.keymap('n', '<leader>sv', ':lua source_init()<CR>')
 map.keymap('i', 'jk', '<esc>')
 map.keymap('v', 'jk', '<esc>')
 
--- Map delegates should take a parameter that is either a fallback map, or a
--- callback. They should return the completion, and optionally the options.
+-- expansion
+map.keymap('i', '<Tab>', comp.expand_or_jump(map.context.I, map.esc("<Tab>")))
+map.keymap('s', '<Tab>', comp.expand_or_jump(map.context.S, map.esc("<Tab>")))
 
-map.keymap('i', '<Tab>', comp.expand_or_jump(map.esc("<Tab>")))
-map.keymap('i', '<S-Tab>', comp.jump_back(map.esc("<C-h>")))
-map.keymap('i', '<CR>', comp.complete(map.esc("<CR>")))
+map.keymap('i', '<S-Tab>', comp.jump_back(map.context.I, map.esc("<C-h>")))
+map.keymap('s', '<S-Tab>', comp.jump_back(map.context.S, map.esc("<C-h>")))
+
+map.keymap('i', '<CR>', comp.complete(map.context.I, map.esc("<CR>")))

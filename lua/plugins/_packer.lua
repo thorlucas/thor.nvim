@@ -49,6 +49,7 @@ return require('packer').startup(function()
 	use { 'preservim/nerdcommenter', opt = true }
 	--use { 'SirVer/ultisnips', opt = true }
 	use { '~/Dropbox/Projects/Programming/Vim/ultisnips', opt = true }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true }
 
 	-- Wiki
 	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }

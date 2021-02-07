@@ -5,9 +5,11 @@ local map = require('util.map')
 
 -- TODO: We really want to actually move this into the function we put in _coc,
 -- otherwise this takes precedence over the pum stuff
-vim.g.UltiSnipsExpandTrigger = "<NUL>"
---vim.g.UltiSnipsJumpForwardTrigger = "<NUL>"
---vim.g.UltiSnipsJumpBackwardTrigger = "<NUL>"
+vim.g.UltiSnipsExpandTrigger = "<leader><Tab>"
+vim.g.UltiSnipsEditSplit = "vertical"
+vim.g.UltiSnipsJumpForwardTrigger = "<leader><Tab>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<leader><S-Tab>"
+vim.g.UltiSnipsRemoveSelectModeMappings = 0
 
 vim.cmd [[packadd ultisnips]]
 
@@ -23,16 +25,16 @@ function M.can_jump_back()
 	return vim.fn['UltiSnips#CanJumpBackwards']() == 1
 end
 
-function M.expand()
-	return map.esc([[<C-R>=UltiSnips#ExpandSnippet()<CR>]])
+function M.expand(context)
+	return map.map_context("UltiSnips#ExpandSnippet()", context)
 end
 
-function M.jump()
-	return map.esc([[<C-R>=UltiSnips#JumpForwards()<CR>]])
+function M.jump(context)
+	return map.map_context("UltiSnips#JumpForwards()", context)
 end
 
-function M.jump_back()
-	return map.esc([[<C-R>=UltiSnips#JumpBackwards()<CR>]])
+function M.jump_back(context)
+	return map.map_context("UltiSnips#JumpBackwards()", context)
 end
 
 return M

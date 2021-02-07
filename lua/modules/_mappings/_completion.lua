@@ -18,53 +18,73 @@ local function pumselected()
 	return vim.api.nvim_eval([[empty(v:completed_item)]]) == 0
 end
 
-function M.expand_or_jump(callback)
-	_G.thor.completion._expand_or_jump = function()
-		if pumselected() then
-			return map.esc('<C-n>')
-		elseif us.can_expand() then
-			return us.expand()
-		elseif pumvisible() then
-			return map.esc('<C-n>')
-		elseif us.can_jump() then
-			return us.jump()
-		elseif coc.can_jump() then
-			-- TODO: Broken
-			return coc.jump()
-		else
-			return callback
+function M.expand_or_jump(context, callback)
+	if context == map.context.I then
+		_G.thor.completion['_expand_or_jump_'..context] = function()
+			if pumselected() then
+				return map.esc('<C-n>')
+			elseif us.can_expand() then
+				return us.expand(context)
+			elseif pumvisible() then
+				return map.esc('<C-n>')
+			elseif us.can_jump() then
+				return us.jump(context)
+			elseif coc.can_jump() then
+				-- TODO: Doesn't work in select mode
+				return coc.jump(context)
+			else
+				return callback
+			end
+		end
+	else
+		_G.thor.completion['_expand_or_jump_'..context] = function()
+			if us.can_expand() then
+				return us.expand(context)
+			elseif us.can_jump() then
+				return us.jump(context)
+			else
+				return callback
+			end
 		end
 	end
 
-	return 'v:lua.thor.completion._expand_or_jump()', { expr = true }
+	return 'v:lua.thor.completion._expand_or_jump_'..context..'()', { expr = true }
 end
 
-function M.jump_back(callback)
-	_G.thor.completion._jump_back = function()
-		if pumvisible() then
-			return map.esc('<C-p>')
-		elseif us.can_jump_back() then
-			return us.jump_back()
-		elseif coc.can_jump_back() then
-			return coc.jump_back()
+function M.jump_back(context, callback)
+	_G.thor.completion['_jump_back_'..context] = function()
+		if context == map.context.I then
+			if pumvisible() then
+				return map.esc('<C-p>')
+			elseif us.can_jump_back() then
+				return us.jump_back(context)
+			elseif coc.can_jump_back() then
+				return coc.jump_back(context)
+			else
+				return callback
+			end
 		else
-			return callback
+			if us.can_jump_back() then
+				return us.jump_back(context)
+			else
+				return callback
+			end
 		end
 	end
 
-	return 'v:lua.thor.completion._jump_back()', { expr = true }
+	return 'v:lua.thor.completion._jump_back_'..context..'()', { expr = true }
 end
 
-function M.complete(callback)
-	_G.thor.completion._complete = function()
+function M.complete(context, callback)
+	_G.thor.completion['_complete_'..context] = function()
 		if pumvisible() then
-			return coc.select_confirm()
+			return coc.select_confirm(context)
 		else
 			return callback
 		end
 	end
 
-	return 'v:lua.thor.completion._complete()', { expr = true }
+	return 'v:lua.thor.completion._complete_'..context..'()', { expr = true }
 end
 
 return M

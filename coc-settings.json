@@ -4,7 +4,7 @@
 	"languageserver": {
 		"ccls": {
 			"command": "ccls",
-			"filetypes": ["c", "cpp", "objc", "objcpp"],
+			"filetypes": [],
 			"rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
 			"initializationOptions": {
 				"cache": {

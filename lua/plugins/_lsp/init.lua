@@ -6,3 +6,4 @@
 require('plugins._lsp._coc')
 require('plugins._lsp._nerdcommenter')
 require('plugins._lsp._ultisnips')
+require('plugins._lsp._treesitter')

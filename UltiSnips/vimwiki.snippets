@@ -1,17 +1,24 @@
-snippet b "Bold" w
+# TODO: Don't add space if the next character is punctuation
+snippet bb "Bold" wA
 **$1**$0
 endsnippet
 
-snippet t
-**${VISUAL}**$0
+snippet ii "Bold" wA
+*$1*$0
 endsnippet
 
-# TODO: bold should:
-# - Add space if the following is not whitespace
-# - Expand visual if there is a visual (we could do with Lua?)
+snippet 'h(\d)' "Heading" brA
+`!p snip.rv = int(match.group(1))*'#'` $0
+endsnippet
 
-# TODO: Expand tab directly if no PUM
+snippet today "Today's date" w
+`date +%F`
+endsnippet
 
-snippet pi
-π $0
+snippet time "Hours and minutes" w
+`date +%H:%M`
+endsnippet
+
+snippet log "Log a drug entry" b
+**`date +%H:%M`** ${1:20mg} ${2:drug}, ${3:oral}
 endsnippet

@@ -5,7 +5,7 @@ vim.cmd [[packadd coc.nvim]]
 
 local map = require('util.map')
 
-function M.select_confirm()
+function M.select_confirm(context)
 	return vim.fn['coc#_select_confirm']()
 end
 
@@ -21,12 +21,13 @@ end
 	--vim.cmd [[call coc#rpc#request('doKeymap', ['snippets-expand-jump',''])]]
 --end
 
-function M.jump()
-	return map.esc('<C-j>')
+-- TODO: Context
+function M.jump(context)
+	return map.map_context(context, [[coc#rpc#request('snippetNext', [])]])
 end
 
-function M.jump_back()
-	return map.esc('<C-k>')
+function M.jump_back(context)
+	return map.map_context(context, [[coc#rpc#request('snippetPrev', [])]])
 end
 
 map.keymap('n', 'gd', '<Plug>(coc-definition)',      { noremap = false })
