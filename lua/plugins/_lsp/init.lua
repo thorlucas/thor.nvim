@@ -6,4 +6,6 @@
 require('plugins._lsp._coc')
 require('plugins._lsp._nerdcommenter')
 require('plugins._lsp._ultisnips')
-require('plugins._lsp._treesitter')
+-- TODO: TreeSitter is being really annoying
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/651
+--require('plugins._lsp._treesitter')

@@ -1,13 +1,15 @@
 vim.g.vimwiki_list = {
 	{
 		path = '~/Dropbox/Wiki',
-		path_html = '~/Dropbox/Wiki_HTML/',
-		template_path = '~/Dropbox/Wiki/Templates/',
-		template_default = 'default',
 		syntax = 'markdown',
 		ext = '.md',
-		custom_wiki2html = '~/.local/share/nvim/scripts/wiki2html.sh',
-	}
+	},
+	{
+		path = '~/Dropbox/Projects/School/Current',
+		syntax = 'markdown',
+		ext = '.md',
+	},
+
 }
 
 vim.g.vimwiki_key_mappings = {
@@ -22,6 +24,8 @@ vim.g.vimwiki_key_mappings = {
 	html = 1,
 	mouse = 0,
 }
+
+vim.g.vimwiki_markdown_link_ext = 1
 
 -- A bug with Vimwiki forces me to load the plugin after the global variable is
 -- set. https://github.com/vimwiki/vimwiki/issues/1072

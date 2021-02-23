@@ -40,6 +40,8 @@ local options = {
 
 apply_options(options)
 
+ vim.cmd('set rtp+=~/.luarocks/')
+
 vim.cmd [[filetype plugin indent on]]
 vim.cmd [[syntax on]]
 

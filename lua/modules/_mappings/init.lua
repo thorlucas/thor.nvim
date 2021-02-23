@@ -5,7 +5,6 @@
 -- mappings.
 
 local map = require('util.map')
-local comp = require('modules._mappings._completion')
 
 -- alt + arrow keys -> window switching
 map.keymap('n', '<A-Up>',    '<C-w>k')
@@ -23,8 +22,11 @@ map.keymap('n', '<leader>sv', ':lua source_init()<CR>')
 -- jk -> esc
 map.keymap('i', 'jk', '<esc>')
 map.keymap('v', 'jk', '<esc>')
+map.keymap('t', 'jk', '<C-\\><C-n>')
 
 -- expansion
+local comp = require('modules._mappings._completion')
+
 map.keymap('i', '<Tab>', comp.expand_or_jump(map.context.I, map.esc("<Tab>")))
 map.keymap('s', '<Tab>', comp.expand_or_jump(map.context.S, map.esc("<Tab>")))
 
@@ -32,3 +34,17 @@ map.keymap('i', '<S-Tab>', comp.jump_back(map.context.I, map.esc("<C-h>")))
 map.keymap('s', '<S-Tab>', comp.jump_back(map.context.S, map.esc("<C-h>")))
 
 map.keymap('i', '<CR>', comp.complete(map.context.I, map.esc("<CR>")))
+
+-- telescope
+local tele = require('plugins._telescope')
+
+map.keymap('n', '<leader>ff', tele.find_files)
+map.keymap('n', '<leader>fp', tele.projects)
+map.keymap('n', '<leader>rl', tele.reloader)
+
+-- vimwiki
+-- TODO: Delegate
+-- TODO: Filetype
+
+map.keymap('n', '<leader>t<Right>', '<Plug>VimwikiTableMoveColumnRight', { noremap = false })
+map.keymap('n', '<leader>t<Left>', '<Plug>VimwikiTableMoveColumnLeft', { noremap = false })

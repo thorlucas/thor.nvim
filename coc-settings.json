@@ -4,7 +4,7 @@
 	"languageserver": {
 		"ccls": {
 			"command": "ccls",
-			"filetypes": [],
+			"filetypes": ["c", "cpp"],
 			"rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
 			"initializationOptions": {
 				"cache": {
@@ -27,8 +27,18 @@
 						"-I",
 						"/Library/Developer/CommandLineTools/usr/include"
 					]
+				},
+				"gcc": {
+					"resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0",
+					"extraArgs": [
+						"-isystem",
+						"/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1",
+						"-I",
+						"/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include",
+						"-I",
+						"/Library/Developer/CommandLineTools/usr/include"
+					]
 				}
-
 			}
 		}
 	}

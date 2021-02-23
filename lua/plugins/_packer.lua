@@ -1,6 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 local use = require('packer').use
+local use_rocks = require('packer').use_rocks
 --local autocmd = require('util.autocmd')
 
 -- TODO: For some bizarre reason, this decides to print the whole buffer to the
@@ -36,9 +37,26 @@ return require('packer').startup(function()
 		},
 	}
 
+	use {
+		'nvim-telescope/telescope.nvim',
+		opt = true,
+		requires = {
+			{ 'nvim-lua/popup.nvim' },
+			{ 'nvim-lua/plenary.nvim' }
+		}
+	}
+	use {
+		'nvim-telescope/telescope-project.nvim',
+		opt = true,
+		requires = {
+			{ 'nvim-telescope/telescope.nvim' }
+		}
+	}
+
 	-- Util
-	use { 'nvim-lua/plenary.nvim', opt = true }
 	use { 'bfredl/nvim-luadev', opt = true }
+	use { 'voldikss/vim-floaterm' }
+	use_rocks { 'lyaml', server = 'http://rocks.moonscript.org' }
 
 	-- LSP
 	use {
@@ -47,9 +65,12 @@ return require('packer').startup(function()
 		branch = 'release',
 	}
 	use { 'preservim/nerdcommenter', opt = true }
-	--use { 'SirVer/ultisnips', opt = true }
-	use { '~/Dropbox/Projects/Programming/Vim/ultisnips', opt = true }
+	use {
+		'SirVer/ultisnips',
+		opt = true
+	}
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true }
+	use { 'kylelaker/riscv.vim' }
 
 	-- Wiki
 	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }

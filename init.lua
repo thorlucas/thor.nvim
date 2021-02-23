@@ -18,3 +18,8 @@ require("plugins._luadev")
 require("plugins._lsp")
 require("plugins._vimwiki")
 require("plugins._goyo")
+require("plugins._telescope")
+
+-- custom
+--require("custom._school");
+require("custom._wiki")

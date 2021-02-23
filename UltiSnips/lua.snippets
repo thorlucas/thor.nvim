@@ -1,7 +1,7 @@
-snippet aa
-$1abc$2cde$3fgh$4ijk$0
-endsnippet
-
-snippet bb
-kdf ${1:asdf} bbb ${2:foo} bar $0
+snippet func "function" w
+function`!p
+snip.rv = ' ' if t[1] != '' else '' 
+`${1:M.${2:my_function}}($3)
+	$0
+end
 endsnippet
