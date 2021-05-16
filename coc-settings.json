@@ -1,6 +1,13 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": ["rust"],
+	"coc.preferences.formatOnSaveFiletypes": ["rust", "html", "blade"],
 	"Lua.diagnostics.globals": ["vim"],
+	"html.filetypes": [
+		"html",
+		"handlebars",
+		"htmldjango",
+		"blade"
+	],
+	"html.format.wrapAttributes": "force-expand-multiline",
 	"languageserver": {
 		"ccls": {
 			"command": "ccls",
@@ -40,6 +47,17 @@
 					]
 				}
 			}
+		},
+		"haskell": {
+			"command": "haskell-language-server-wrapper",
+			"args": [ "--lsp" ],
+			"rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+			"filetypes": [
+				"hs",
+				"lhs",
+				"haskell",
+				"lhaskell"
+			]
 		}
 	}
 }

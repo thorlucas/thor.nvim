@@ -1,0 +1,122 @@
+snippet ii "textit{}" wA
+\textit{$1}$0
+endsnippet
+
+snippet bb "textbf{}" wA
+\textbf{$1}$0
+endsnippet
+
+snippet ch "ch{}" w
+\ch{$1}$0
+endsnippet
+
+snippet "\b((?:[A-Z][a-z]?\d?)+)" "ch{}" wr
+\ch{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet beg "begin{} / end{}" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet sec "section{}" bA
+\section{$1}
+$0
+endsnippet
+
+snippet ssec "section{}" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet sch "New scheme" bA
+\begin{scheme}
+	\includegraphics{`!p
+if not getattr(snip, "fig_done", None):
+	snip.fig_done = vim.eval('v:lua.thor.wiki.edit_new_default_figure("eps")')
+snip.rv = snip.fig_done
+`}
+	\caption{$1}\label{sch:$2}
+\end{scheme}
+$0
+endsnippet
+
+snippet fig "New figure" bA
+\begin{figure}
+	\includegraphics{`!p
+if not getattr(snip, "fig_done", None):
+	snip.fig_done = vim.eval('v:lua.thor.wiki.edit_new_default_figure("eps")')
+snip.rv = snip.fig_done
+`}
+	\caption{$1}\label{fig:$2}
+\end{figure}
+$0
+endsnippet
+
+
+snippet si "\SI{}{}" w
+\SI{$1}{$2}$0
+endsnippet
+
+snippet "(\d+(?:\.\d+)?)m[lL]" "\SI{regex}{\milli\liter}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\milli\liter}$0
+endsnippet
+
+snippet "(\d+(?:\.\d+)?)m[gG]" "\SI{regex}{\milli\gram}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\milli\gram}$0
+endsnippet
+
+snippet "(\d+(?:\.\d+)?)mmol" "\SI{regex}{\milli\mole}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\milli\mole}$0
+endsnippet
+
+snippet "(\d+)min" "\SI{regex}{\minute}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\minute}$0
+endsnippet
+
+snippet "(\d+(?:\.\d+)?)%" "\SI{regex}{\percent}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\percent}$0
+endsnippet
+
+snippet "(\d+(?:\.\d+)?)[cC]" "\SI{regex}{\celsius}" rA
+\SI{`!p
+snip.rv = match.group(1)
+`}{\celsius}$0
+endsnippet
+
+snippet tab "tabular" bA
+\begin{center}
+	\begin{tabular}{$1}
+		\hline
+		$2
+		\hline
+		$3
+		\hline
+	\end{tabular}
+\end{center}
+$0
+endsnippet
+
+snippet xtab "tabularx" bA
+\begin{center}
+	\begin{tabularx}{\textwidth}{$1}
+		\hline
+		$2
+		\hline
+		$3
+		\hline
+	\end{tabularx}
+\end{center}
+$0
+endsnippet

@@ -1,7 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 local use = require('packer').use
-local use_rocks = require('packer').use_rocks
+--local use_rocks = require('packer').use_rocks
 --local autocmd = require('util.autocmd')
 
 -- TODO: For some bizarre reason, this decides to print the whole buffer to the
@@ -55,8 +55,9 @@ return require('packer').startup(function()
 
 	-- Util
 	use { 'bfredl/nvim-luadev', opt = true }
-	use { 'voldikss/vim-floaterm' }
-	use_rocks { 'lyaml', server = 'http://rocks.moonscript.org' }
+	use { 'voldikss/vim-floaterm', opt = true }
+	use { 'junegunn/vim-easy-align', opt = true }
+	use { 'folke/which-key.nvim', opt = true }
 
 	-- LSP
 	use {
@@ -69,8 +70,10 @@ return require('packer').startup(function()
 		'SirVer/ultisnips',
 		opt = true
 	}
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true }
-	use { 'kylelaker/riscv.vim' }
+	--use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true }
+	use { 'kylelaker/riscv.vim', opt = true }
+	use { 'lervag/vimtex', opt = true }
+	use { 'jwalton512/vim-blade', opt = true }
 
 	-- Wiki
 	use { 'vimwiki/vimwiki', opt = true, branch = 'dev' }

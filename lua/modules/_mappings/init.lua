@@ -16,8 +16,8 @@ map.keymap('n', '<A-Left>',  '<C-w>h')
 -- ev -> edit vim, sv -> source vim
 -- TODO: Now that init is split across multiple files, it would be useful to
 -- also open up LuaTree in the init directory
-map.keymap('n', '<leader>ev', ':vsplit $MYVIMRC<CR>')
-map.keymap('n', '<leader>sv', ':lua source_init()<CR>')
+--map.keymap('n', '<leader>ev', ':vsplit $MYVIMRC<CR>')
+--map.keymap('n', '<leader>sv', ':lua source_init()<CR>')
 
 -- jk -> esc
 map.keymap('i', 'jk', '<esc>')
@@ -37,10 +37,22 @@ map.keymap('i', '<CR>', comp.complete(map.context.I, map.esc("<CR>")))
 
 -- telescope
 local tele = require('plugins._telescope')
+local wk = require('which-key')
 
-map.keymap('n', '<leader>ff', tele.find_files)
-map.keymap('n', '<leader>fp', tele.projects)
-map.keymap('n', '<leader>rl', tele.reloader)
+wk.register({
+	["<leader>"] = {
+		f = {
+			name = "+file",
+			f = { tele.find_files, "Find file" },
+			p = { tele.projects, "Find project" },
+			t = { "<Cmd>echo 'hello'<CR>", "Test" },
+		},
+	},
+})
+
+--map.keymap('n', '<leader>ff', tele.find_files)
+--map.keymap('n', '<leader>fp', tele.projects)
+--map.keymap('n', '<leader>rl', tele.reloader)
 
 -- vimwiki
 -- TODO: Delegate

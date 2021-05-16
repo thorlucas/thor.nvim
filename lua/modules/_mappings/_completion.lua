@@ -22,17 +22,23 @@ function M.expand_or_jump(context, callback)
 	if context == map.context.I then
 		_G.thor.completion['_expand_or_jump_'..context] = function()
 			if pumselected() then
+				print("[COM] PUM selected")
 				return map.esc('<C-n>')
 			elseif us.can_expand() then
+				print("[COM] US expand")
 				return us.expand(context)
 			elseif pumvisible() then
+				print("[COM] PUM visible")
 				return map.esc('<C-n>')
 			elseif us.can_jump() then
+				print("[COM] US jump")
 				return us.jump(context)
 			elseif coc.can_jump() then
+				print("[COM] COC jump")
 				-- TODO: Doesn't work in select mode
 				return coc.jump(context)
 			else
+				print("[COM] Callback")
 				return callback
 			end
 		end
