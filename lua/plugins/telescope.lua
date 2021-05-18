@@ -1,16 +1,9 @@
-local M = {}
+--require'telescope'.load_extension('project')
 
-local map = require('util.map')
-
-vim.cmd [[packadd plenary.nvim]]
-vim.cmd [[packadd popup.nvim]]
-vim.cmd [[packadd telescope.nvim]]
-vim.cmd [[packadd telescope-project.nvim]]
-
-M.find_files = "<Cmd>lua require'telescope.builtin'.find_files()<CR>"
-M.projects = "<Cmd>lua require'telescope'.extensions.project.project{ change_dir = true }<CR>"
-M.reloader = "<Cmd>lua require'telescope.builtin'.reloader()<CR>"
-
-require'telescope'.load_extension('project')
-
-return M
+return {
+	files = "<Cmd>lua require'telescope.builtin'.find_files()<CR>",
+	buffers = "<Cmd>lua require'telescope.builtin'.buffers()<CR>",
+	references = "<Cmd>lua require'telescope.builtin'.lsp_references()<CR>",
+	definitions = "<Cmd>lua require'telescope.builtin'.lsp_definitions()<CR>",
+	--find_projects = "<Cmd>lua require'telescope'.extensions.project.project{ change_dir = true }<CR>",
+}

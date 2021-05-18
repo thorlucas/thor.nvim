@@ -3,21 +3,28 @@ cfg.setup {}
 
 cfg.register({
 	r = {
-		name = "reload",
+		name = "Reload",
 		l = { "<Cmd>Reload<CR>", "Reload config" },
 		r = { "<Cmd>Restart<CR>", "Restart neovim" },
 	},
 	c = {
-		name = "comment",
+		name = "Comment",
 		["<Space>"] = { "<plug>NERDCommenterToggle", "Toggle comment", noremap = false },
 	},
 	q = {
-		name = "lsp",
+		name = "LSP",
 		f = { "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code action" },
 		r = { "<Cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
 		s = { "<Cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" },
 		h = { "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", "Documentation" },
 		d = { "<Cmd>lua require('lspsaga.provider').preview_definition()<CR>", "Definition" },
+	},
+	f = {
+		name = "Find",
+		f = { require'plugins.telescope'.files, "Find files" },
+		b = { require'plugins.telescope'.buffers, "Find buffers" },
+		r = { require'plugins.telescope'.references, "Find references" },
+		d = { require'plugins.telescope'.definitions, "Find definitions" },
 	},
 }, { prefix = "<leader>", mode = "n" })
 

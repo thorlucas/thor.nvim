@@ -43,22 +43,16 @@ return require('packer').startup(function()
 			{ 'kyazdani42/nvim-web-devicons', opt = true }
 		},
 	}
-
-	--use {
-		--'nvim-telescope/telescope.nvim',
-		--opt = true,
-		--requires = {
-			--{ 'nvim-lua/popup.nvim' },
-			--{ 'nvim-lua/plenary.nvim' }
-		--}
-	--}
-
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = {
+			{ 'nvim-lua/popup.nvim' },
+			{ 'nvim-lua/plenary.nvim' }
+		}
+	}
 	--use {
 		--'nvim-telescope/telescope-project.nvim',
-		--opt = true,
-		--requires = {
-			--{ 'nvim-telescope/telescope.nvim' }
-		--}
+		--requires = { 'nvim-telescope/telescope.nvim' },
 	--}
 
 

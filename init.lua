@@ -7,5 +7,3 @@ require("modules.lsp")
 require("modules.editor")
 require("modules.aesthetic")
 require("modules.mappings")
-
-
