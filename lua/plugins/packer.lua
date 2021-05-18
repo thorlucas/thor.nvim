@@ -16,7 +16,7 @@ return require('packer').startup(function()
 	use 'onsails/lspkind-nvim'
 	use 'glepnir/lspsaga.nvim'
 	-- use 'ray-x/lsp_signature.nvim'
-	-- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	-- use 'simrat39/rust-tools.nvim'
 	
 	-- Snippet

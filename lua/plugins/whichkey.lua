@@ -14,6 +14,10 @@ cfg.register({
 	q = {
 		name = "lsp",
 		f = { "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code action" },
+		r = { "<Cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
+		s = { "<Cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" },
+		h = { "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", "Documentation" },
+		d = { "<Cmd>lua require('lspsaga.provider').preview_definition()<CR>", "Definition" },
 	},
 }, { prefix = "<leader>", mode = "n" })
 
