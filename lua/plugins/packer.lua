@@ -12,9 +12,28 @@ return require('packer').startup(function()
 	-- LSP
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/nvim-compe'
-	--use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-lua/lsp_extensions.nvim'
+	use 'onsails/lspkind-nvim'
+	use 'glepnir/lspsaga.nvim'
+	-- use 'ray-x/lsp_signature.nvim'
+	-- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	-- use 'simrat39/rust-tools.nvim'
+	
+	-- Snippet
+	use 'hrsh7th/vim-vsnip'
+	use 'hrsh7th/vim-vsnip-integ'
+
+	-- Editor
+	use {
+		'famiu/nvim-reload',
+		requires = {'nvim-lua/plenary.nvim', opt = true}
+	}
+	use 'folke/which-key.nvim'
+	use {
+		'hoob3rt/lualine.nvim',
+		requires = {'kyazdani42/nvim-web-devicons', opt = true}
+	}
+	use 'preservim/nerdcommenter'
 	
 
 	-- File Tree
@@ -42,7 +61,6 @@ return require('packer').startup(function()
 		--}
 	--}
 
-	--use { 'folke/which-key.nvim', opt = true }
 
 
 	--use { 'lervag/vimtex', opt = true }

@@ -1,24 +1,11 @@
-_G.plugins = {}
-_G.thor = {}
-
-
 -- load plugin manager
 require("plugins.packer")
 
--- plugins config
+-- load modules
+require("modules.settings")
+require("modules.lsp")
+require("modules.editor")
+require("modules.aesthetic")
+require("modules.mappings")
 
--- colorscheme
-require("plugins.nord")
 
--- lsp
-require("plugins.lspconfig")
-require("plugins.compe")
---require("plugins.treesitter")
-
---editor
-require("plugins.nvimtree")
-
---require("plugins.whichkey")
---require("plugins.telescope")
---require("plugins.vimtex")
---require("plugins.vimwiki")
