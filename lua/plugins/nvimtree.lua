@@ -8,4 +8,4 @@ vim.g.nvim_tree_hijack_netrw = 0
 
 vim.cmd [[packadd nvim-tree.lua]]
 
-require('util.map').keymap('n', '<C-n>', ':NvimTreeToggle<CR>')
+--require('util.map').keymap('n', '<C-n>', ':NvimTreeToggle<CR>')

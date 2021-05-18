@@ -1,38 +1,24 @@
 _G.plugins = {}
 _G.thor = {}
 
--- bootstrap
-require("modules._bootstrap")
 
 -- load plugin manager
-require("plugins._packer")
-
--- settings
-require("modules._settings")
---require("modules._mappings")
-require("modules._appearance")
+require("plugins.packer")
 
 -- plugins config
-require("plugins._luatree")
-require("plugins._whichkey")
-require("plugins._luadev")
-require("plugins._lsp")
-require("plugins._vimwiki")
-require("plugins._goyo")
-require("plugins._telescope")
-require("plugins._vimtex")
 
-require("modules._mappings")
+-- colorscheme
+require("plugins.nord")
 
--- custom
---require("custom._school");
-require("custom._wiki")
+-- lsp
+require("plugins.lspconfig")
+require("plugins.compe")
+--require("plugins.treesitter")
 
--- TODO: Temporary
---vim.cmd [[augroup blade_ft]]
---vim.cmd [[au!]]
---vim.cmd [[autocmd BufNewFile,BufRead *.blade.php set filetype=blade]]
---vim.cmd [[augroup END]]
+--editor
+require("plugins.nvimtree")
 
-vim.cmd [[set nocp]]
-vim.cmd [[filetype plugin on]]
+--require("plugins.whichkey")
+--require("plugins.telescope")
+--require("plugins.vimtex")
+--require("plugins.vimwiki")
