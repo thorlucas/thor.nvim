@@ -1,11 +1,10 @@
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = {
-		"rust",
-		--"javascript",
-		--"html",
-		--"css",
+		"javascript",
+		"html",
+		"css",
 		--"lua",
-		--"json",
+		"json",
 		--"python",
 		--"bash"
 	},
