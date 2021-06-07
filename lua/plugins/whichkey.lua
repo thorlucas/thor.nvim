@@ -26,6 +26,14 @@ cfg.register({
 		r = { require'plugins.telescope'.references, "Find references" },
 		d = { require'plugins.telescope'.definitions, "Find definitions" },
 	},
+	['<Tab>'] = {
+		name = "Tab utilities",
+		-- TODO: Make this use the default tab config rather than hardcoding to 4
+		[2] = {
+			"<Cmd>set ts=2<CR><Cmd>%retab!<CR><Cmd>set ts=4<CR>",
+			"Convert 2 spaces to tabs",
+		},
+	},
 }, { prefix = "<leader>", mode = "n" })
 
 cfg.register({
