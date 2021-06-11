@@ -1,5 +1,13 @@
 --require'telescope'.load_extension('project')
 
+require'telescope'.setup({
+	defaults = {
+		file_ignore_patterns = {
+			"node_modules/.*",
+		},
+	},
+})
+
 return {
 	files = "<Cmd>lua require'telescope.builtin'.find_files()<CR>",
 	buffers = "<Cmd>lua require'telescope.builtin'.buffers()<CR>",
