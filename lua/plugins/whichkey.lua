@@ -17,7 +17,8 @@ cfg.register({
 		r = { "<Cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
 		s = { "<Cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" },
 		h = { "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", "Documentation" },
-		d = { "<Cmd>lua require('lspsaga.provider').preview_definition()<CR>", "Definition" },
+		p = { "<Cmd>lua require('lspsaga.provider').preview_definition()<CR>", "Definition" },
+		d = { "<Cmd>lua require('lspsaga.provider').lsp_finder()<CR>" },
 	},
 	f = {
 		name = "Find",

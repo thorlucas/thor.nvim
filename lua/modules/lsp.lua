@@ -4,6 +4,7 @@ require("plugins.compe")
 require("plugins.lspkind")
 require("plugins.lspsaga")
 require("plugins.treesitter")
+require("plugins.vsnip");
 
 local t = require'util.vim'.termcode
 local check_back_space = require'util.vim'.check_back_space

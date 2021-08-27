@@ -19,6 +19,8 @@ return require('packer').startup(function()
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	-- use 'simrat39/rust-tools.nvim'
 	
+	use 'jwalton512/vim-blade'
+	
 	-- Snippet
 	use 'hrsh7th/vim-vsnip'
 	use 'hrsh7th/vim-vsnip-integ'
@@ -34,6 +36,7 @@ return require('packer').startup(function()
 		requires = {'kyazdani42/nvim-web-devicons', opt = true}
 	}
 	use 'preservim/nerdcommenter'
+	use 'ggandor/lightspeed.nvim'
 	
 
 	-- File Tree

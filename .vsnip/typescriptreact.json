@@ -1,0 +1,29 @@
+{
+	"React File Componenet": {
+		"prefix": ["comp"],
+		"body": [
+			"import React from \"react\";",
+			"",
+			"interface ${2:${TM_FILENAME_BASE}Props} {",
+			"\t$3",
+			"}",
+			"",
+			"const ${1:$TM_FILENAME_BASE}: React.FC<$2> = ({",
+			"\t$4",
+			"}) => {",
+			"\t$0",
+			"};",
+			"",
+			"export default $1;"
+		],
+		"description": "A single-file React component template."
+	},
+	"Use Effect": {
+		"prefix": ["eff"],
+		"body": [
+			"useEffect(() => {",
+			"\t$0",
+			"}, [$1])"
+		]
+	}
+}

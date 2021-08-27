@@ -1,0 +1,11 @@
+{
+	"Creates a JSDoc comment": {
+		"prefix": "doc",
+		"body": [
+			"/**",
+			" * $0",
+			" */"
+		],
+		"description": "Creates a JSDoc comment"
+	}
+}
