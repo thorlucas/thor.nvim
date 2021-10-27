@@ -14,10 +14,12 @@ return require('packer').startup(function()
 	use 'hrsh7th/nvim-compe'
     use 'nvim-lua/lsp_extensions.nvim'
 	use 'onsails/lspkind-nvim'
-	use 'glepnir/lspsaga.nvim'
+	use 'tami5/lspsaga.nvim'
 	-- use 'ray-x/lsp_signature.nvim'
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	-- use 'simrat39/rust-tools.nvim'
+	use 'simrat39/rust-tools.nvim'
+	use 'stephpy/vim-yaml'
+	use 'peterhoeg/vim-qml'
 	
 	use 'jwalton512/vim-blade'
 	
@@ -53,6 +55,10 @@ return require('packer').startup(function()
 			{ 'nvim-lua/plenary.nvim' }
 		}
 	}
+
+	-- Utility
+	use 'jamessan/vim-gnupg'
+
 	--use {
 		--'nvim-telescope/telescope-project.nvim',
 		--requires = { 'nvim-telescope/telescope.nvim' },

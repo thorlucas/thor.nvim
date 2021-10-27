@@ -8,13 +8,11 @@
 			"\t$3",
 			"}",
 			"",
-			"const ${1:$TM_FILENAME_BASE}: React.FC<$2> = ({",
+			"export const ${1:$TM_FILENAME_BASE}: React.FC<$2> = ({",
 			"\t$4",
 			"}) => {",
 			"\t$0",
-			"};",
-			"",
-			"export default $1;"
+			"};"
 		],
 		"description": "A single-file React component template."
 	},

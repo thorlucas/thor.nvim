@@ -26,6 +26,7 @@ cfg.register({
 		b = { require'plugins.telescope'.buffers, "Find buffers" },
 		r = { require'plugins.telescope'.references, "Find references" },
 		d = { require'plugins.telescope'.definitions, "Find definitions" },
+		g = { require'plugins.telescope'.git_status, "Git status" },
 	},
 	['<Tab>'] = {
 		name = "Tab utilities",

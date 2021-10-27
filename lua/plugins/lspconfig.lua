@@ -1,10 +1,7 @@
 local lsp = require'lspconfig'
 
-vim.cmd [[ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({focusable = false}) ]]
-vim.cmd [[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = 'Comment', enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' } }]]
-
-local on_attach = function(client)
-end
+--vim.cmd [[ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({focusable = false}) ]]
+--vim.cmd [[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = 'Comment', enabled = { 'TypeHint', 'ChainingHint', 'ParameterHint' } }]]
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -16,30 +13,47 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 	}
 }
 
-lsp.rust_analyzer.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		["rust-analyzer"] = {
-			assist = {
-				importMergeBehavior = "last",
-				importPrefix = "by_self",
-			},
-			cargo = {
-				loadOutDirsFromCheck = true
-			},
-			procMacro = {
-				enable = true
-			},
-		}
+require('rust-tools').setup {
+	tools = {
+		autoSetHints = true,
+		inlay_hints = {
+			show_parameter_hints = true,
+		},
+		hover_actions = {
+			auto_focus = true,
+		},
+	},
+	server = {
+		cmd = { "/Users/thorcorreia/.rustup/toolchains/nightly-x86_64-apple-darwin/bin/rust-analyzer" }
 	}
-}
+};
 
-lsp.tsserver.setup {
-	on_attach = on_attach,
-}
+--lsp.rust_analyzer.setup {
+	--on_attach = on_attach,
+	--capabilities = capabilities,
+	--settings = {
+		--["rust-analyzer"] = {
+			--assist = {
+				--importMergeBehavior = "last",
+				--importPrefix = "by_self",
+			--},
+			--cargo = {
+				--loadOutDirsFromCheck = true
+			--},
+			--procMacro = {
+				--enable = true
+			--},
+		--}
+	--}
+--}
 
-lsp.pyright.setup{}
+local servers = { 'tsserver', 'tailwindcss', 'cssls', 'svelte' };
+
+for _, serv in ipairs(servers) do
+	lsp[serv].setup {
+		capabilities = capabilities,
+	}
+end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
