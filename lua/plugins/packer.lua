@@ -19,9 +19,14 @@ return require('packer').startup(function()
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'simrat39/rust-tools.nvim'
 	use 'stephpy/vim-yaml'
-	use 'peterhoeg/vim-qml'
-	
+	use 'peterhoeg/vim-qml'	
 	use 'jwalton512/vim-blade'
+	-- Lua
+	use {
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+	}
+
 	
 	-- Snippet
 	use 'hrsh7th/vim-vsnip'
@@ -58,6 +63,7 @@ return require('packer').startup(function()
 
 	-- Utility
 	use 'jamessan/vim-gnupg'
+	use 'github/copilot.vim'
 
 	--use {
 		--'nvim-telescope/telescope-project.nvim',

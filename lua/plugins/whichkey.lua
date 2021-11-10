@@ -14,11 +14,15 @@ cfg.register({
 	q = {
 		name = "LSP",
 		f = { "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code action" },
+		--ff = { "<Cmd>TroubleToggle quickfix<CR>", "Code actions list" },
+		--x = { "<Cmd>TroubleToggle lsp_workspace_diagnostics<CR>", "Diagnostics" },
+		x = { require'plugins.telescope'.workspace_diagnostics, "Workspace Diagnostics" },
 		r = { "<Cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
 		s = { "<Cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature help" },
 		h = { "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", "Documentation" },
 		p = { "<Cmd>lua require('lspsaga.provider').preview_definition()<CR>", "Definition" },
 		d = { "<Cmd>lua require('lspsaga.provider').lsp_finder()<CR>" },
+		q = { "<Cmd>lua require('plugins.copilot').toggle_copilot()<CR>", "Toggle copilot" },
 	},
 	f = {
 		name = "Find",
