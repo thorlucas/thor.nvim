@@ -7,7 +7,11 @@ return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 
 	-- Aesthetic
-	use 'shaunsingh/nord.nvim'
+	--use 'shaunsingh/nord.nvim'	
+	use {
+		'folke/tokyonight.nvim',
+		config = function() vim.cmd[[colorscheme tokyonight]] end,
+	}
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'
@@ -25,6 +29,10 @@ return require('packer').startup(function()
 	use {
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
+	}
+	use {
+		'iamcco/markdown-preview.nvim',
+		run = 'cd app && yarn install',
 	}
 
 	
