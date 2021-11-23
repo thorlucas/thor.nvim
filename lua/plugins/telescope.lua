@@ -22,6 +22,8 @@ return {
 	references = "<Cmd>lua require'telescope.builtin'.lsp_references()<CR>",
 	definitions = "<Cmd>lua require'telescope.builtin'.lsp_definitions()<CR>",
 	git_status = "<Cmd>lua require'telescope.builtin'.git_status()<CR>",
+	git_commits = "<Cmd>lua require'telescope.builtin'.git_commits()<CR>",
+	git_branches = "<Cmd>lua require'telescope.builtin'.git_branches()<CR>",
 	workspace_diagnostics = "<Cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics()<CR>",
 	--find_projects = "<Cmd>lua require'telescope'.extensions.project.project{ change_dir = true }<CR>",
 }

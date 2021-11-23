@@ -30,7 +30,15 @@ cfg.register({
 		b = { require'plugins.telescope'.buffers, "Find buffers" },
 		r = { require'plugins.telescope'.references, "Find references" },
 		d = { require'plugins.telescope'.definitions, "Find definitions" },
-		g = { require'plugins.telescope'.git_status, "Git status" },
+	},
+	g = {
+		name = "Git",
+		a = { "<Cmd>Git add %<CR>", "Add current" },
+		d = { "<Cmd>Gdiffsplit<CR>", "Diff split" },
+		c = { "<Cmd>Git commit<CR>", "Commit" },
+		s = { require'plugins.telescope'.git_status, "List status" },
+		l = { require'plugins.telescope'.git_status, "List commits" },
+		b = { require'plugins.telescope'.git_status, "List branches" },
 	},
 	['<Tab>'] = {
 		name = "Tab utilities",
@@ -48,6 +56,10 @@ cfg.register({
 		["<Space>"] = { "<plug>NERDCommenterToggle", "Toggle comment", noremap = false },
 	}
 }, { prefix = "<leader>", mode = "v" })
+
+vim.cmd[[nmap <silent> <expr> <CR> &diff ? 'do' : '<CR>']]
+vim.cmd[[nmap <silent> <expr> <Tab> &diff ? ']c' : '<Tab>']]
+vim.cmd[[nmap <silent> <expr> <S-Tab> &diff ? '[c' : '<S-Tab>']]
 
 -- nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 -- nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>

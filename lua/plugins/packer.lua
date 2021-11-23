@@ -39,6 +39,20 @@ return require('packer').startup(function()
 	-- Snippet
 	use 'hrsh7th/vim-vsnip'
 	use 'hrsh7th/vim-vsnip-integ'
+	use {
+		'SirVer/ultisnips',
+		setup = function()
+			vim.g.UltiSnipsExpandTrigger = "<NUL>"
+			vim.g.UltiSnipsListSnippets = "<NUL>"
+			vim.g.UltiSnipsJumpForwardTrigger = "<NUL>"
+			vim.g.UltiSnipsJumpBackwardTrigger = "<NUL>"
+			vim.g.UltiSnipsEditSplit = "tabdo"
+		end,
+		config = function()
+			vim.g.UltiSnipsEnabled = true
+		end,
+		ft = { 'markdown' },
+	}
 
 	-- Editor
 	use {
@@ -68,6 +82,7 @@ return require('packer').startup(function()
 			{ 'nvim-lua/plenary.nvim' }
 		}
 	}
+	use 'tpope/vim-fugitive'
 
 	-- Utility
 	use 'jamessan/vim-gnupg'
