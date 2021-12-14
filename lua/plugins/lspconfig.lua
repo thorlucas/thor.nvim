@@ -25,10 +25,20 @@ require('rust-tools').setup {
 	},
 	server = {
 		cmd = { "/Users/thorcorreia/.rustup/toolchains/nightly-x86_64-apple-darwin/bin/rust-analyzer" },
-		--procMacro = {
-			--enable = true,
-		--}
-	}
+		cmd_env = {
+			RA_LOG = 'rust_analyzer=error',
+		},
+		settings = {
+			["rust-analyzer"] = {
+				cargo = {
+					allFeatures = true,
+				},
+				procMacro = {
+					enable = true,
+				},
+			},
+		},
+	},
 };
 
 --lsp.rust_analyzer.setup {
@@ -57,6 +67,11 @@ for _, serv in ipairs(servers) do
 		capabilities = capabilities,
 	}
 end
+
+local luadev = require('lua-dev').setup({})
+lsp.sumneko_lua.setup(luadev)
+
+vim.cmd[[autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)]]
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {

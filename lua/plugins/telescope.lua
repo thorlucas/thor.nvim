@@ -14,7 +14,14 @@ require'telescope'.setup({
 			"node_modules/.*",
 		},
 	},
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {}
+		}
+	}
 })
+
+require("telescope").load_extension("ui-select")
 
 return {
 	files = "<Cmd>lua require'telescope.builtin'.find_files()<CR>",

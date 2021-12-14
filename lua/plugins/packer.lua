@@ -21,10 +21,17 @@ return require('packer').startup(function()
 	use 'tami5/lspsaga.nvim'
 	-- use 'ray-x/lsp_signature.nvim'
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'simrat39/rust-tools.nvim'
+	use {
+		'simrat39/rust-tools.nvim',
+		requires = {
+			{ 'mfussenegger/nvim-dap', },
+			{ 'nvim-lua/plenary.nvim', },
+		},
+	}
 	use 'stephpy/vim-yaml'
 	use 'peterhoeg/vim-qml'	
 	use 'jwalton512/vim-blade'
+	use 'folke/lua-dev.nvim'
 	-- Lua
 	use {
 		"folke/trouble.nvim",
@@ -81,6 +88,11 @@ return require('packer').startup(function()
 			{ 'nvim-lua/popup.nvim' },
 			{ 'nvim-lua/plenary.nvim' }
 		}
+	}
+	use { 'stevearc/dressing.nvim' }
+	use {
+		'nvim-telescope/telescope-ui-select.nvim',
+		requires = 'nvim-telescope/telescope.nvim',
 	}
 	use 'tpope/vim-fugitive'
 
