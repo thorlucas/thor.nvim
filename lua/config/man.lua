@@ -1,43 +1,40 @@
 local M = {}
 local util = require('util')
 
-local notify = function(path)
-	for p, t, ls in util.walk_path(path, _G._config, _G._config._listeners) do
-		if ls == nil then
-			return
-		end
-
+---Walks along every node in `t`, and calls the corresponding listener if that node is
+-- not nil.
+---@param t table
+local notify = function(t)
+	print("NOTIFYING DIFS: "..vim.inspect(t))
+	for d, ls in util.zip(t, _G._config._listeners) do
 		for _, l in ipairs(ls) do
-			l(t, p)
+			l(d)
 		end
 	end
 end
 
 M.attach = function(path, callback)
 	path = util.parse_path(path)
-	util.path_set(_G._config._listeners, path, { callback }, 'insert')
+	util.set(_G._config._listeners, path, { callback }, true)
 
-	local current = util.path_get(_G._config, path)
+	local current = util.get(_G._config, path)
 	if current ~= nil then
 		callback(current, path)
 	end
 end
 
-M.merge = function(values, mode)
-	local t = util.merge(_G._config, values, mode)
-	notify()
-	return t
+M.merge = function(values, insert)
+	local diffs = util.merge(_G._config, values, insert)
+	notify(diffs)
 end
 
 M.get = function(path)
-	return util.path_get(_G._config, path)
+	return util.get(_G._config, path)
 end
 
-M.set = function(path, value, mode)
-	path = util.parse_path(path)
-	local t = util.path_set(_G._config, path, value, mode)
-	notify(path)
-	return t
+M.set = function(path, value, insert)
+	local diffs = util.set(_G._config, path, value, insert)
+	notify(diffs)
 end
 
 setmetatable(M, {

@@ -75,5 +75,14 @@ return {
 		-- load plugins based on filetype 
 		-- load indent info basedo on filetype
 		filetype = "plugin indent on",
+
+		-- allows relative line numbers in normal mode, but absolute in insert mode
+		[[
+			augroup number_toggle
+			autocmd!
+			autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+			autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
+			augroup END
+		]],
 	}
 }

@@ -3,78 +3,62 @@
 
 local M = {}
 
----Merges two tables with an option to replace by numeric keys or to insert.
----@param t1 table the table that will be merged into
----@param t2 table the table to merge
----@param mode 'replace'|'insert' whether to replace numeric keys or to insert
-M.merge = function(t1, t2, mode)
-	mode = mode or 'replace'
-	if t2 == nil then
-		return
-	end
+M.empty = function(t) 
+	return not next(t)
+end
 
+M.empty_to_nil = function(t)
+	if M.empty(t) then
+		return nil
+	else
+		return t
+	end
+end
+
+M.merge = function(t1, t2, insert)
+	insert = insert or false
+
+	local diff = {}
 	for k, v in pairs(t2) do
-		if mode == 'insert' and type(k) == 'number' then
-			if type(t1) == 'table' then
-				table.insert(t1, v)
-			else
-				t1[k] = v
-			end
+		if type(k) == 'number' and insert then
+			table.insert(diff, v)
+			table.insert(t1, v)
 		elseif type(v) == 'table' then
-			if type(t1[k] or false) == 'table' then
-				M.merge(t1[k] or {}, t2[k] or {}, mode)
-			else
-				t1[k] = v
+			if not M.empty(v) then
+				if type(t1[k]) == 'table' then
+					diff[k] = M.merge(t1[k], v, insert)
+				else
+					diff[k] = v
+					t1[k] = v
+				end
 			end
-		else
+		elseif t1[k] ~= v then
+			diff[k] = v
 			t1[k] = v
 		end
 	end
-
-	return t1
+	return M.empty_to_nil(diff)
 end
 
----Parses a path, returning a list containing each component.
----@param path string|table|nil the path to parse
----@return table an array with each path component
-M.parse_path = function(path)
-	if path == nil then
-		return {}
-	elseif type(path) == 'string' then
-		return vim.fn.split(path, [[\.]])
-	elseif type(path) == 'table' then
-		return path
-	else
-		vim.notify("Error parsing path: "..vim.inspect(path))
-		return nil
+-- For convenience we want a function that is equivalent to 
+-- M.merge(t1, { a = { b = { c = "d" } } }, insert) but that can be written as
+-- M.set(t1, {'a', 'b', 'c'}, 'd', insert)
+M.set = function(t1, p, v, insert)
+	p = M.parse_path(p)
+	local t2 = v
+	for i = #p, 1, -1 do
+		t2 = { [p[i]] = t2 }
 	end
-end
-
----Creates a nested key-value table mapping a path to a value.
----@param path string|table|nil
----@return table the nested key-value table
-M.path_value_table = function(path, value)
-	path = M.parse_path(path)
-	local pv = {}
-	local t = pv
-	for i, comp in ipairs(path) do
-		if i == #path then
-			t[comp] = value
-		else
-			t[comp] = {}
-		end
-		t = t[comp]
-	end
-	return pv
+	return M.merge(t1, t2, insert)
 end
 
 ---Gets a value from a table using a path.
 ---@param t table the table to index
----@param path string|table|nil the path
+---@param p string|table|nil the path
 ---@returns any the value of the table at the path or nil
-M.path_get = function(t, path)
-	path = M.parse_path(path)
-	for _, comp in ipairs(path) do
+M.get = function(t, p)
+	p = M.parse_path(p)
+	for _, comp in ipairs(p) do
 		if t == nil then
 			return nil
 		end
@@ -83,39 +67,23 @@ M.path_get = function(t, path)
 	return t
 end
 
----Similar to merge(), but only with one value.
----In order for this function to insert, the value must be a table. In that case,
----`merge()` will be called on the target path and the value.
----
----If the path already exists on the target but isn't a table, then it will replace
----instead of insert.
-M.path_set = function(t, path, value, mode)
-	path = M.parse_path(path)
-	mode = mode or 'replace'
-	
-	for i, comp in ipairs(path) do
-		if i == #path then
-			if mode == 'insert' and type(value) == 'table' then
-				if type(t[comp]) == 'table' then
-					M.merge(t[comp], value, mode)
-				else
-					t[comp] = value
-				end
-			else
-				t[comp] = value
-			end
-		else
-			if t[comp] == nil then
-				t[comp] = {}
-			end
-		end
-		t = t[comp]
+---Parses a path, returning a list containing each component.
+---@param path string|table|nil the path to parse
+---@return table an array with each path component
+M.parse_path = function(path)
+	if type(path) == 'table' then
+		return path
+	elseif path == nil then
+		return {}
+	elseif type(path) == 'string' then
+		return vim.fn.split(path, [[\.]])
+	else
+		vim.notify("Error parsing path: "..vim.inspect(path))
+		return nil
 	end
-
-	return t
 end
 
-local walk_path_inner = function(path, ...)
+M._walk_path_inner = function(path, ...)
 	local ts = {...}
 	local p = {}
 	coroutine.yield(p, unpack(ts))
@@ -144,10 +112,30 @@ M.walk_path = function(path, ...)
 	path = M.parse_path(path)
 	local ts = {...}
 	return coroutine.wrap(function()
-		return walk_path_inner(path, unpack(ts))
+		return M._walk_path_inner(path, unpack(ts))
 	end)
 end
 
+---Walks along all nodes of a table, zipping with the keys of another table. Only those values where both tables have non-nil entries are returned.
+M._zip_inner = function(t1, t2)
+	if t2 == nil or t1 == nil then
+		return
+	end
+
+	coroutine.yield(t1, t2)
+
+	if type(t1) == 'table' and type(t2) == 'table' then
+		for k, v in pairs(t1) do
+			M._zip_inner(v, t2[k])
+		end
+	end
+end
+
+M.zip = function(t1, t2)
+	return coroutine.wrap(function()
+		return M._zip_inner(t1, t2)
+	end)
+end
 
 ---Sets vim options.
 -- Uses `:set <opt>` if the option is set to true and `:set no<opt>` if set to false.

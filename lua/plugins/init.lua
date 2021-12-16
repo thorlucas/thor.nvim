@@ -1,7 +1,7 @@
-_G._plugins = require('util').merge({
+_G._plugins = _G._plugins or {
 	needs_sync = false,
 	loaded = false,
-}, _G._plugins or {})
+}
 _G.packer_plugins = _G.packer_plugins or {}
 
 local M = {}
@@ -26,8 +26,14 @@ local function register_plugins()
 	-- Package manager
 	use { 'wbthomason/packer.nvim', opt = false }
 
+	-- Utility
+	use { 'nvim-lua/plenary.nvim', opt = false }
+
 	-- Appearance
 	require 'plugins.theme'.setup()
+
+	-- Managers (e.g. keymap managers)
+	require 'plugins.managers'.setup()
 	
 	-- TODO: Temporary
 	-- Register listeners
@@ -43,11 +49,13 @@ end
 function M.setup()
 	init()
 
+	local config = require('config')['modules.plugins']
+
 	-- Initialize packer
 	packer.init({
-		opt_default = true,
+		opt_default = config.opt_default,
 		display = {
-			non_interactive = true,
+			non_interactive = not config.display,
 		},
 	})
 
@@ -61,6 +69,11 @@ function M.setup()
 
 	_G._plugins.loaded = true
 end
+
+M._defaults = {
+	display = true,
+	opt_default = true,
+}
 
 M._autoload = function()
 	require('plugins').setup()
