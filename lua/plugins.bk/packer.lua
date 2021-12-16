@@ -7,7 +7,7 @@ return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 
 	-- Aesthetic
-	--use 'shaunsingh/nord.nvim'	
+	--use 'shaunsingh/nord.nvim'
 	use {
 		'folke/tokyonight.nvim',
 		config = function() vim.cmd[[colorscheme tokyonight]] end,

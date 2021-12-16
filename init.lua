@@ -1,21 +1,16 @@
-G = {}
+local config = require('config') {
+	debug = true,
+	theme = 'catppuccin',
+}
 
--- load plugin manager
-require("plugins.packer")
+if config.debug then
+	function P(...)
+		print(vim.inspect(...))
+	end
 
--- load modules
-require("modules.settings")
-require("modules.lsp")
-require("modules.editor")
-require("modules.aesthetic")
-require("modules.mappings")
-
-function G.refresh_test()
-	local refresh_cmd = [[echo 'hello']]
-	vim.cmd('! nvr --servername "${NVIM_LISTEN_ADDRESS}-test" -c "'..refresh_cmd..'"')
+	function R(...)
+		return require(...)
+	end
 end
 
--- temp: reload nvimtest when in dev mode
---vim.cmd[[
---	autocmd BufWritePost *.lua silent lua G.refresh_test()
---]]
+require('plugins').setup()
