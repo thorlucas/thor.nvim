@@ -4,7 +4,7 @@ local use = packer.use
 local M = {}
 
 local function theme_cond(theme)
-	return vim.fn.printf([[require('config').theme == '%s']], theme)
+	return vim.fn.printf([[require('config').get('theme') == '%s']], theme)
 end
 
 local function theme_cmd(theme)
