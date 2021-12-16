@@ -20,6 +20,13 @@ local configs = function()
 	return t
 end
 
+---The `_defaults` are for the configuration of the actual *module loaders* themselves.
+-- For example, it tells the bootstrap module what paths to use, or gives config to
+-- packer for what sort of behavior it should have.
+--
+-- This is *not* the same thing as the actual configuration, which is sort of just
+-- spread throughout the config in whatever way seems fit.
+--
 -- Every defaults has to promise to not do any initialization. They can be functions or
 -- tables, but if they're functions, they must promise to not initialize anything --
 -- only return default configs.
@@ -32,6 +39,7 @@ M._defaults = function()
 	for _, m in ipairs({
 		'plugins',
 		'bootstrap',
+		'editor',
 	}) do
 		local d = require(m)._defaults or {}
 

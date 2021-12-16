@@ -129,6 +129,7 @@ local walk_path_inner = function(path, ...)
 	end
 end
 
+
 ---Returns an iterator walking a path for any number of tables.
 -- For each iteration, this function will yield the current path, as well as the values
 -- for each of the tables when indexed by that path. If the table has no value along
@@ -143,5 +144,22 @@ M.walk_path = function(path, ...)
 		return walk_path_inner(path, unpack(ts))
 	end)
 end
+
+
+---Sets vim options.
+-- Uses `:set <opt>` if the option is set to true and `:set no<opt>` if set to false.
+-- Otherwise, uses `:set <opt> = <value>`.
+M.set_opt = function(opts)
+	for k, v in pairs(opts) do
+		if v == true then
+			vim.cmd('set '..k)
+		elseif v == false then
+			vim.cmd('set no'..k)
+		else
+			vim.cmd(string.format('set %s=%s', k, v))
+		end
+	end
+end
+
 
 return M

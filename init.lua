@@ -9,6 +9,8 @@
 --end
 
 require('bootstrap').autoload {
+	'bootstrap',
 	'config',
+	'editor',
 	'plugins',
 }

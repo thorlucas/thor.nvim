@@ -6,11 +6,13 @@ local fn = vim.fn
 M.autoload = function(...)
 	-- TODO: Allow async here
 	for _, m in ipairs(...) do
-		local status, err = pcall(function()
-			require(m)._autoload()
-		end)
-		if status == false then
-			vim.notify(vim.fn.printf("Fatal: Error while autoloading module %s: %s", m, vim.inspect(err)), 4)
+		if m ~= 'bootstrap' then
+			local status, err = pcall(function()
+				require(m)._autoload()
+			end)
+			if status == false then
+				vim.notify(vim.fn.printf("Fatal: Error while autoloading module %s: %s", m, vim.inspect(err)), 4)
+			end
 		end
 	end
 end
