@@ -1,16 +1,24 @@
+local M = {}
 local fn = vim.fn
 
-local M = {}
-
-local default_paths = {
-	packer = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim',
-}
+---Tries to autoloads the indicated modules.
+-- Does this by trying to call `<module>._autoload()`.
+M.autoload = function(...)
+	-- TODO: Allow async here
+	for _, m in ipairs(...) do
+		local status, err = pcall(function()
+			require(m)._autoload()
+		end)
+		if status == false then
+			vim.notify(vim.fn.printf("Fatal: Error while autoloading module %s: %s", m, vim.inspect(err)), 4)
+		end
+	end
+end
 
 ---Ensures that `packer.nvim` is installed.
----@param path string the path to install packer to. Defaults to somewhere in stdpath('data').
 ---@return boolean whether packer was just installed.
-function M.packer(path)
-	path = path or default_paths.packer
+M.packer = function()
+	local path = require('config')['modules.bootstrap.paths.packer']
 
 	if fn.empty(fn.glob(path)) > 0 then
 		fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', path})
@@ -19,5 +27,11 @@ function M.packer(path)
 		return false
 	end
 end
+
+M._defaults = {
+	paths = {
+		packer = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim',
+	},
+}
 
 return M

@@ -1,10 +1,10 @@
-local M = {}
-_G._plugins = _G._plugins or {
+_G._plugins = require('util').merge({
 	needs_sync = false,
-	debug = true,
-}
+	loaded = false,
+}, _G._plugins or {})
 _G.packer_plugins = _G.packer_plugins or {}
 
+local M = {}
 local packer = nil
 
 local function init()
@@ -58,6 +58,12 @@ function M.setup()
 	if _G._plugins.needs_sync or _G._plugins.debug then
 		packer.sync()
 	end
+
+	_G._plugins.loaded = true
+end
+
+M._autoload = function()
+	require('plugins').setup()
 end
 
 return M

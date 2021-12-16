@@ -1,10 +1,5 @@
-local util = require('util')
 local M = {}
-
-_G._config = _G._config or {
-	_listeners = {},
-	debug = false,
-}
+local util = require('util')
 
 local notify = function(path)
 	for p, t, ls in util.walk_path(path, _G._config, _G._config._listeners) do
@@ -46,10 +41,12 @@ M.set = function(path, value, mode)
 end
 
 setmetatable(M, {
-	__index = _G._config,
-	__call = function(this, values)
-		return this.merge(values)
+	__index = function(this, path)
+		return this.get(path)
 	end,
+	__call = function(this, values, mode)
+		return this.merge(values, mode)
+	end
 })
 
 return M

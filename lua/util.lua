@@ -6,6 +6,9 @@ local M = {}
 ---@param mode 'replace'|'insert' whether to replace numeric keys or to insert
 M.merge = function(t1, t2, mode)
 	mode = mode or 'replace'
+	if t2 == nil then
+		return
+	end
 
 	for k, v in pairs(t2) do
 		if mode == 'insert' and type(k) == 'number' then
@@ -126,6 +129,13 @@ local walk_path_inner = function(path, ...)
 	end
 end
 
+---Returns an iterator walking a path for any number of tables.
+-- For each iteration, this function will yield the current path, as well as the values
+-- for each of the tables when indexed by that path. If the table has no value along
+-- that path, it will instead yield `nil`.
+---@param path string|table|nil
+---@param ... table
+---@return fun() an iterator
 M.walk_path = function(path, ...)
 	path = M.parse_path(path)
 	local ts = {...}
