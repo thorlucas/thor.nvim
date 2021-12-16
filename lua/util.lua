@@ -109,4 +109,29 @@ M.path_set = function(t, path, value, mode)
 	return t
 end
 
+local walk_path_inner = function(path, ...)
+	local ts = {...}
+	local p = {}
+	coroutine.yield(p, unpack(ts))
+	for _, comp in ipairs(path) do
+		for i, t in ipairs(ts) do
+			if type(t) == 'table' then
+				ts[i] = t[comp]
+			else
+				ts[i] = nil
+			end
+		end
+		table.insert(p, comp)
+		coroutine.yield(p, unpack(ts))
+	end
+end
+
+M.walk_path = function(path, ...)
+	path = M.parse_path(path)
+	local ts = {...}
+	return coroutine.wrap(function()
+		return walk_path_inner(path, unpack(ts))
+	end)
+end
+
 return M
