@@ -1,3 +1,6 @@
+---The `util` module provides utility functions for interacting with tables and for
+-- setting vim options.
+
 local M = {}
 
 ---Merges two tables with an option to replace by numeric keys or to insert.
@@ -149,7 +152,7 @@ end
 ---Sets vim options.
 -- Uses `:set <opt>` if the option is set to true and `:set no<opt>` if set to false.
 -- Otherwise, uses `:set <opt> = <value>`.
-M.set_opt = function(opts)
+M.set_opts = function(opts)
 	for k, v in pairs(opts) do
 		if v == true then
 			vim.cmd('set '..k)
@@ -161,5 +164,18 @@ M.set_opt = function(opts)
 	end
 end
 
+M.run_cmds = function(cmds)
+	for k, v in pairs(cmds) do
+		if type(k) == 'string' then
+			if type(v) == 'table' then
+				vim.cmd(k.." "..vim.fn.join(v, " "))
+			else
+				vim.cmd(k.." "..v)
+			end
+		else
+			vim.cmd(v)
+		end
+	end
+end
 
 return M
