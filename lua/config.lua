@@ -1,38 +1,12 @@
+local util = require('util')
 local M = {}
-local _listeners = {}
 
 _G._config = _G._config or {
 	debug = false,
 	_listeners = {},
+	_scheduled = {},
 }
 
-local function merge(t1, t2)
-	for k, v in pairs(t2) do
-		if type(v) == 'table' then
-			if type(t1[k] or false) == 'table' then
-				merge(t1[k] or {}, t2[k] or {})
-			else
-				t1[k] = v
-			end
-		else
-			t1[k] = v
-		end
-	end
-
-	return t1
-end
-
-local parse_path_string = function(path)
-	if path == nil then
-		return {}
-	elseif type(path) == 'string' then
-		return vim.fn.split(path, [[\.]])
-	elseif type(path) == 'table' then
-		return path
-	else
-		vim.notify("Error parsing path: "..vim.inspect(path))
-	end
-end
 
 local notify_at_level = function(ls, value, path)
 	for _, l in ipairs(ls) do
@@ -40,8 +14,8 @@ local notify_at_level = function(ls, value, path)
 	end
 end
 
-M.notify = function(path)
-	path = parse_path_string(path)
+local notify = function(path)
+	path = util.parse_path(path)
 	local t = _G._config
 	local l = t._listeners
 	local p = {}
@@ -63,27 +37,25 @@ M.notify = function(path)
 	notify_at_level(l, t, p)
 end
 
+local notify_scheduled = function()
+	for _, path in ipairs(t) do
+		
+	end
+end
+
 local schedule_notify = vim.schedule_wrap(M.notify)
 
-M.merge = function(values)
-	merge(_G._config, values)
+M.merge = function(values, mode)
+	util.merge(_G._config, values, mode)
 	schedule_notify()
 end
 
 M.get = function(path)
-	path = parse_path_string(path)
-	local t = _G._config
-	for _, key in ipairs(path) do
-		if t == nil then
-			return nil
-		end
-		t = t[key]
-	end
-	return t
+	return util.path_get(_G._config, path)
 end
 
 M.set = function(path, value)
-	path = parse_path_string(path)
+	path = util.parse_path(path)
 	local t = _G._config
 	for index, key in ipairs(path) do
 		if index == #path then
@@ -104,7 +76,7 @@ M.set = function(path, value)
 end
 
 M.attach = function(path, callback)
-	path = parse_path_string(path)
+	path = util.parse_path(path)
 	local ls = _G._config._listeners
 
 	for index, key in ipairs(path) do
