@@ -4,14 +4,12 @@
 local M = {}
 
 M.load_opts = function(opts)
-	print("setting opts")
 	require('util').set_opts(
 		opts
 	)
 end
 
 M.load_cmds = function(cmds)
-	print("setting cmds")
 	require('util').run_cmds(
 		cmds
 	)

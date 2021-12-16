@@ -7,7 +7,6 @@ _G._config = _G._config or {
 				return require(m)._defaults
 			end)
 			if stat then
-				print("Loading defaults for mod: "..m)
 				if type(res) == 'function' then
 					res = res()
 				end

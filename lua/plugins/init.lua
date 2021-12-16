@@ -34,6 +34,14 @@ local function register_plugins()
 
 	-- Managers (e.g. keymap managers)
 	require 'plugins.managers'.setup()
+
+	-- Navigation
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+		},
+	}
 	
 	-- TODO: Temporary
 	-- Register listeners

@@ -5,7 +5,6 @@ local M = {}
 
 M.set_mappings = function(mappings)
 	if _G._keymap.manager then
-		print("registering mappings")
 		for _, m in ipairs(mappings) do
 			_G._keymap.manager.register(unpack(m))
 		end

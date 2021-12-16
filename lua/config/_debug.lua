@@ -1,1 +1,4 @@
-return true
+return {
+	functions = true,
+	reload = true,
+}

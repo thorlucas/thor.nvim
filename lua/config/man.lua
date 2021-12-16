@@ -5,7 +5,6 @@ local util = require('util')
 -- not nil.
 ---@param t table
 local notify = function(t)
-	print("NOTIFYING DIFS: "..vim.inspect(t))
 	for d, ls in util.zip(t, _G._config._listeners) do
 		for _, l in ipairs(ls) do
 			l(d)

@@ -1,6 +1,10 @@
 local M = {}
 
-M.define_debug_functions = function()
+M.reload_config = nil
+
+M.define_debug_functions = function(on)
+	if not on then return end
+
 	function P(...)
 		local args = {...}
 		if #args > 1 then
@@ -25,12 +29,28 @@ M.define_debug_functions = function()
 	end
 end
 
-M._autoload = function()
-	require('config').attach('debug', function(debug)
-		if debug then
-			M.define_debug_functions()
+M.define_debug_reload = function(on)
+	if not on then return end
+
+	M.reload_config = function()
+		require('plenary.reload').reload_module('config')
+		require('config')
+	end
+
+	M.reload_all = function()
+		local rl = require('plenary.reload')
+		local ps = { 'bootstrap', 'config', 'editor', 'plugins', 'keymap', 'editor_debug' }
+		for _, p in ipairs(ps) do
+			rl.reload_module(p)
 		end
-	end)
+		require('bootstrap').autoload(ps)
+	end
+end
+
+M._autoload = function()
+	local config = require('config')
+	config.attach('debug.functions', M.define_debug_functions) 
+	config.attach('debug.reload', M.define_debug_reload)
 end
 
 return M

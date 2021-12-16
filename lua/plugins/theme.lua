@@ -35,7 +35,13 @@ local function register_plugins()
 	use_theme {
 		'catppuccin/nvim',
 		as = 'catppuccin',
-		config = [[require('catppuccin').setup()]],
+		config = [[require('catppuccin').setup({
+			integrations = {
+				telescope = true,
+				which_key = true,
+				markdown = true,
+			}
+		})]],
 	}
 end
 
