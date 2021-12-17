@@ -47,6 +47,12 @@ M.define_debug_reload = function(on)
 	end
 end
 
+M.edit_config = function()
+	vim.cmd('cd '..vim.fn.stdpath('config'))
+	require('nvim-tree').open()
+	vim.cmd('edit init.lua')
+end
+
 M._autoload = function()
 	local config = require('config')
 	config.attach('debug.functions', M.define_debug_functions) 

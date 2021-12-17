@@ -7,4 +7,14 @@ require('bootstrap').autoload {
 	'editor_debug',
 }
 
-vim.cmd[[autocmd BufWritePost *.lua lua require'catppuccin'.load()]]
+function TempReload()
+	require'packer'.compile()
+end
+
+-- vim.cmd[[
+-- 	autocmd BufWritePost *.lua lua TempReload()
+-- ]]
+-- 
+-- vim.cmd[[
+-- 	autocmd User PackerCompileDone require'nvim-tree'.open()
+-- ]]

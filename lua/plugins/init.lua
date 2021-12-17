@@ -41,6 +41,17 @@ local function register_plugins()
 		requires = {
 			'nvim-lua/plenary.nvim',
 		},
+		config = function()
+			require('telescope').setup {
+				defaults = {
+					mappings = {
+						i = {
+							['<esc>'] = require('telescope.actions').close,
+						},
+					},
+				},
+			}
+		end,
 		opt = false,
 	}
 	use {
@@ -62,7 +73,7 @@ local function register_plugins()
 				diagnostics = {
 					enable = true,
 				},
-
+				open_on_setup = true,
 			}
 		end,
 		opt = false,
