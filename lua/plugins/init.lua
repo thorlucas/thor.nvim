@@ -63,12 +63,16 @@ local function register_plugins()
 	}
 
 	use {
-		'folke/lua-dev.nvim',
-		config = function()
-			
-		end,
-		opt = false
+		'neovim/nvim-lspconfig',
+		opt = false,
 	}
+
+	use {
+		'folke/lua-dev.nvim',
+		opt = false,
+	}
+
+	require('plugins.plugin.cmp').use()
 
 	use {
 		'rafcamlet/nvim-luapad',
@@ -77,6 +81,7 @@ local function register_plugins()
 		end,
 		opt = false,
 	}
+
 	
 	-- TODO: Temporary
 	-- Register listeners

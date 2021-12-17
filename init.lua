@@ -11,11 +11,18 @@ function TempReload()
 	require'packer'.compile()
 end
 
-return {
-	test = function()
-		print("asdf")
-	end
-}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local luadev = require('lua-dev').setup({
+	lspconfig = {
+		capabilities = capabilities,
+	},
+})
+local lspconf = require('lspconfig')
+lspconf.sumneko_lua.setup(luadev)
+
+local luasnip = require('luasnip')
+local cmp = require('cmp')
 
 -- vim.cmd[[
 -- 	autocmd BufWritePost *.lua lua TempReload()
