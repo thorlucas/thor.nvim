@@ -24,6 +24,7 @@ return {
 				c = { function() require('editor_debug').reload_config() end, "Reload config" },
 				l = { function() require('editor_debug').reload_all() end, "Reload all" },
 				e = { function() require('editor_debug').edit_config() end, "Edit config" },
+				p = { function() require('editor_debug').reload_packer() end, "Plugin sync and reload" },
 			},
 			f = {
 				-- Find (telescope)

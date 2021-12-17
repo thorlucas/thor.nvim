@@ -39,11 +39,17 @@ M.define_debug_reload = function(on)
 
 	M.reload_all = function()
 		local rl = require('plenary.reload')
-		local ps = { 'bootstrap', 'config', 'editor', 'plugins', 'mappings', 'editor_debug' }
-		for _, p in ipairs(ps) do
-			rl.reload_module(p)
+		for k, p in ipairs(package.loaded) do
+			rl.reload_module(k)
 		end
-		require('bootstrap').autoload(ps)
+		require('init')
+	end
+
+	M.reload_packer = function()
+		local rl = require('plenary.reload')
+		rl.reload_module('plugins')
+		require('bootstrap').autoload({'plugins'})
+		require('packer').sync()
 	end
 end
 

@@ -36,24 +36,7 @@ local function register_plugins()
 	require 'plugins.managers'.setup()
 
 	-- Navigation
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim',
-		},
-		config = function()
-			require('telescope').setup {
-				defaults = {
-					mappings = {
-						i = {
-							['<esc>'] = require('telescope.actions').close,
-						},
-					},
-				},
-			}
-		end,
-		opt = false,
-	}
+	require('plugins.plugin.telescope').use()
 	use {
 		disable = true,
 		'ms-jpq/chadtree',
@@ -75,6 +58,22 @@ local function register_plugins()
 				},
 				open_on_setup = true,
 			}
+		end,
+		opt = false,
+	}
+
+	use {
+		'folke/lua-dev.nvim',
+		config = function()
+			
+		end,
+		opt = false
+	}
+
+	use {
+		'rafcamlet/nvim-luapad',
+		config = function()
+			require('luapad').setup({})
 		end,
 		opt = false,
 	}
