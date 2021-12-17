@@ -33,15 +33,50 @@ local function register_plugins()
 	}
 
 	use_theme {
-		'catppuccin/nvim',
+		'~/Dev/nvim/catppuccin',
+		--'catppuccin/nvim',
 		as = 'catppuccin',
-		config = [[require('catppuccin').setup({
-			integrations = {
-				telescope = true,
-				which_key = true,
-				markdown = true,
+		config = function()
+			require('catppuccin').setup({
+				term_colors = true,
+				integrations = {
+					telescope = true,
+					which_key = true,
+					markdown = true,
+					nvimtree = {
+						enabled = true,
+						show_root = true,
+					},
+				},
+			})
+			vim.cmd[[colorscheme catppuccin]]
+		end
+	}
+
+	-- UI
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = false },
+		config = function()
+			require('lualine').setup {
+				options = {
+					theme = 'catppuccin',
+					extensions = { 'nvim-tree' },
+				},
 			}
-		})]],
+		end,
+		opt = false,
+	}
+
+	use {
+		'akinsho/bufferline.nvim',
+		requires = 'kyazdani42/nvim-web-devicons',
+		config = function()
+			require('bufferline').setup {
+
+			}
+		end,
+		opt = false,
 	}
 end
 

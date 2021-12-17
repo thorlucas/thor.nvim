@@ -5,6 +5,7 @@ return {
 			['<A-Right>'] = { '<C-w>l', "Go to the right window" },
 			['<A-Up>'   ] = { '<C-w>k', "Go to the up window"    },
 			['<A-Down>' ] = { '<C-w>j', "Go to the down window"  },
+			['<C-N>'    ] = { '<Cmd>lua require("nvim-tree").toggle()<CR>', "Toggle NvimTree" },
 		}, {
 			mode = 'n'
 		}

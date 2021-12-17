@@ -3,6 +3,8 @@ require('bootstrap').autoload {
 	'config',
 	'editor',
 	'plugins',
-	'keymap',
+	'mappings',
 	'editor_debug',
 }
+
+vim.cmd[[autocmd BufWritePost *.lua lua require'catppuccin'.load()]]

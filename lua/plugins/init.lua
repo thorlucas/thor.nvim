@@ -41,6 +41,31 @@ local function register_plugins()
 		requires = {
 			'nvim-lua/plenary.nvim',
 		},
+		opt = false,
+	}
+	use {
+		disable = true,
+		'ms-jpq/chadtree',
+		branch = 'chad',
+		run = 'python3 -m chadtree deps',
+	}
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = {
+			{ 'kyazdani42/nvim-web-devicons', opt = false },
+		},
+		config = function()
+			vim.g.nvim_tree_highlight_opened_files = 1
+			require('nvim-tree').setup {
+				hijack_cursor = true,
+				update_cwd = true,
+				diagnostics = {
+					enable = true,
+				},
+
+			}
+		end,
+		opt = false,
 	}
 	
 	-- TODO: Temporary

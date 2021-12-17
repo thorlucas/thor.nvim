@@ -1,18 +1,18 @@
-_G._keymap = _G._keymap or {
+_G._mappings = _G._mappings or {
 	manager = nil,
 }
 local M = {}
 
 M.set_mappings = function(mappings)
-	if _G._keymap.manager then
+	if _G._mappings.manager then
 		for _, m in ipairs(mappings) do
-			_G._keymap.manager.register(unpack(m))
+			_G._mappings.manager.register(unpack(m))
 		end
 	end
 end
 
-M.set_keymap_manager = function(manager)
-	_G._keymap.manager = manager
+M.set_mappings_manager = function(manager)
+	_G._mappings.manager = manager
 	M.set_mappings(require('config')['mappings'])
 end
 

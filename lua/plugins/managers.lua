@@ -9,9 +9,9 @@ local function register_plugins()
 		config = function()
 			local wk = require('which-key')
 			wk.setup({})
-			require('keymap').set_keymap_manager(wk)
+			require('mappings').set_mappings_manager(wk)
 		end,
-		cond = [[require('config')['managers.keymap'] == 'which-key']],
+		cond = [[require('config')['managers.mappings'] == 'which-key']],
 	}
 end
 

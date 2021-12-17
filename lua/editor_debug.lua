@@ -39,7 +39,7 @@ M.define_debug_reload = function(on)
 
 	M.reload_all = function()
 		local rl = require('plenary.reload')
-		local ps = { 'bootstrap', 'config', 'editor', 'plugins', 'keymap', 'editor_debug' }
+		local ps = { 'bootstrap', 'config', 'editor', 'plugins', 'mappings', 'editor_debug' }
 		for _, p in ipairs(ps) do
 			rl.reload_module(p)
 		end

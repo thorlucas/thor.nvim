@@ -39,6 +39,8 @@ return {
 		listchars = [[tab:\│\ ]],
 		-- shows line number in the sign column
 		signcolumn = "number",
+		-- highlights curent line
+		cursorline = true,
 
 
 		---- TABS ----
@@ -77,12 +79,13 @@ return {
 		filetype = "plugin indent on",
 
 		-- allows relative line numbers in normal mode, but absolute in insert mode
-		[[
-			augroup number_toggle
-			autocmd!
-			autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-			autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
-			augroup END
-		]],
+		-- I can't get this to not do its thing in nerdtree
+-- 		[[
+-- 			augroup number_toggle
+-- 			autocmd!
+-- 			autocmd BufEnter,FocusGained,InsertLeave * if !(&ft ==? "NerdTree") | set relativenumber | endif
+-- 			autocmd BufLeave,FocusLost,InsertEnter * if !(&ft ==? "NerdTree") | set norelativenumber | endif
+-- 			augroup END
+-- 		]],
 	}
 }
