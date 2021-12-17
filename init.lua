@@ -10,6 +10,10 @@ require("modules.editor")
 require("modules.aesthetic")
 require("modules.mappings")
 
+function P(...)
+	print(vim.inspect(...))
+end
+
 function G.refresh_test()
 	local refresh_cmd = [[echo 'hello']]
 	vim.cmd('! nvr --servername "${NVIM_LISTEN_ADDRESS}-test" -c "'..refresh_cmd..'"')

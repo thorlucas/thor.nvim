@@ -7,10 +7,19 @@ return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 
 	-- Aesthetic
-	--use 'shaunsingh/nord.nvim'	
+	--use 'shaunsingh/nord.nvim'
 	use {
+		disable = true,
 		'folke/tokyonight.nvim',
 		config = function() vim.cmd[[colorscheme tokyonight]] end,
+	}
+	use {
+		'catppuccin/nvim',
+		as = 'catppuccin',
+		config = function()
+			require('catppuccin').setup()
+			vim.cmd[[colorscheme catppuccin]]
+		end,
 	}
 
 	-- LSP
@@ -32,6 +41,12 @@ return require('packer').startup(function()
 	use 'peterhoeg/vim-qml'	
 	use 'jwalton512/vim-blade'
 	use 'folke/lua-dev.nvim'
+	use {
+		'rafcamlet/nvim-luapad',
+		config = function()
+			require('luapad').setup()
+		end,
+	}
 	-- Lua
 	use {
 		"folke/trouble.nvim",
