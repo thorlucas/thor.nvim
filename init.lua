@@ -21,8 +21,7 @@ local luadev = require('lua-dev').setup({
 local lspconf = require('lspconfig')
 lspconf.sumneko_lua.setup(luadev)
 
-local luasnip = require('luasnip')
-local cmp = require('cmp')
+require'snippets'
 
 -- vim.cmd[[
 -- 	autocmd BufWritePost *.lua lua TempReload()

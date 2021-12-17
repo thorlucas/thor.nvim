@@ -50,4 +50,37 @@ return {
 			mode = 'v'
 		}
 	},
+	{
+		-- Treesitter text objects
+		-- TODO: Sync somehow with initialization
+		{
+			a = {
+				name = '+around',
+				f = 'a function',
+				c = 'a call',
+			},
+			i = {
+				name = '+inside',
+				f = 'a function',
+				c = 'a call',
+				a = 'an argument',
+			}
+		}, {
+			mode = 'o',
+			prefix = '',
+		},
+	},
+	{
+		-- Treesitter swaps
+		{
+			['<ctrl-a>'] = {
+				name = 'Swap argument...',
+				h = 'to the left',
+				l = 'to the right',
+			},
+		}, {
+			mode = 'n',
+			prefix = '',
+		},
+	},
 }

@@ -9,6 +9,10 @@ M.load_opts = function(opts)
 	)
 end
 
+local function sdf()
+	print("asdf")
+end
+
 M.load_cmds = function(cmds)
 	require('util').run_cmds(
 		cmds

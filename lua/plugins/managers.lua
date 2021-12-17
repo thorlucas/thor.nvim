@@ -8,7 +8,13 @@ local function register_plugins()
 		'folke/which-key.nvim',
 		config = function()
 			local wk = require('which-key')
-			wk.setup({})
+			wk.setup {
+				presets = {
+					operators = true,
+					motions = true,
+					text_objects = true,
+				},
+			}
 			require('mappings').set_mappings_manager(wk)
 		end,
 		cond = [[require('config')['managers.mappings'] == 'which-key']],

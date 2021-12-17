@@ -17,13 +17,23 @@ M.setup = function()
 			end,
 		},
 		mapping = {
+			["<leader><Tab>"] = cmp.mapping(function(fallback)
+				-- TODO: 
+				-- if cmp.get_selected_entry() then
+				-- end
+
+				if luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
+					cmp.abort()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-				elseif has_words_before() then
-					cmp.complete()
 				else
 					fallback()
 				end
@@ -37,16 +47,29 @@ M.setup = function()
 					fallback()
 				end
 			end, { "i", "s" }),
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
+			['<CR>'] = cmp.mapping.confirm(),
 		},
 		sources = cmp.config.sources({
-			{ name = 'nvim_lsp' },
 			{ name = 'luasnip' },
+			{
+				name = 'nvim_lsp',
+				keyword_length = 2,
+				max_item_count = 5,
+			},
 		}, {
-			{ name = 'buffer' },
-		})
+			{
+				name = 'buffer',
+				keyword_length = 5,
+				max_item_count = 2,
+			},
+		}),
+		experimental = {
+			ghost_text = true,
+			native_menu = true,
+		},
 	})
 end
+
 
 M.use = function()
 	use { 'hrsh7th/cmp-nvim-lsp', opt = false }

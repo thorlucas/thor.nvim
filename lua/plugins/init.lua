@@ -82,6 +82,53 @@ local function register_plugins()
 		opt = false,
 	}
 
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		config = function()
+			require('nvim-treesitter.configs').setup {
+				highlight = {
+					enable = true,
+					disable = { 'rust', 'lua' },
+				},
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = false,
+						keymaps = {
+							['af'] = '@function.outer',
+							['if'] = '@function.outer',
+							--['ac'] = '@class.outer',
+							--['ic'] = '@class.outer',
+							['ac'] = '@call.outer',
+							['ic'] = '@call.inner',
+							['ia'] = '@parameter.inner',
+						},
+					},
+					swap = {
+						enable = true,
+						swap_next = {
+							['<leader>a'] = '@parameter.inner',
+						},
+						swap_previous = {
+							['<leader>A'] = '@parameter.inner',
+						},
+					},
+				},
+			}
+		end,
+		run = [[:TSUpdate]],
+		opt = false,
+	}
+
+	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+	use {
+		'nvim-treesitter/nvim-treesitter-textobjects',
+		requires = {
+			{ 'nvim-treesitter/nvim-treesitter' },
+		},
+		opt = false,
+	}
+
 	
 	-- TODO: Temporary
 	-- Register listeners
