@@ -25,6 +25,46 @@ local function use_theme(spec)
 	use(spec)
 end
 
+local catppuccin_cfg = function()
+	require('catppuccin').setup({
+		term_colors = true,
+		integrations = {
+			telescope = true,
+			which_key = true,
+			markdown = true,
+			nvimtree = {
+				enabled = true,
+				show_root = true,
+			},
+		},
+	})
+	vim.cmd[[colorscheme catppuccin]]
+end
+
+local lualine_cfg = function()
+	require('lualine').setup {
+		options = {
+			theme = 'catppuccin',
+			extensions = { 'nvim-tree' },
+		},
+	}
+end
+
+local bufferline_cfg = function()
+	require('bufferline').setup {
+
+	}
+end
+
+_G.reload_catppuccin = function()
+	require('plenary.reload').reload_module('catppuccin')
+	require('plenary.reload').reload_module('lualine')
+	require('plenary.reload').reload_module('bufferline')
+	catppuccin_cfg()
+	lualine_cfg()
+	bufferline_cfg()
+end
+
 local function register_plugins()
 	use_theme {
 		'folke/tokyonight.nvim',
@@ -36,46 +76,21 @@ local function register_plugins()
 		'~/Dev/nvim/catppuccin',
 		--'catppuccin/nvim',
 		as = 'catppuccin',
-		config = function()
-			require('catppuccin').setup({
-				term_colors = true,
-				integrations = {
-					telescope = true,
-					which_key = true,
-					markdown = true,
-					nvimtree = {
-						enabled = true,
-						show_root = true,
-					},
-				},
-			})
-			vim.cmd[[colorscheme catppuccin]]
-		end
+		config = catppuccin_cfg,
 	}
 
 	-- UI
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = false },
-		config = function()
-			require('lualine').setup {
-				options = {
-					theme = 'catppuccin',
-					extensions = { 'nvim-tree' },
-				},
-			}
-		end,
+		config = lualine_cfg,
 		opt = false,
 	}
 
 	use {
 		'akinsho/bufferline.nvim',
 		requires = 'kyazdani42/nvim-web-devicons',
-		config = function()
-			require('bufferline').setup {
-
-			}
-		end,
+		config = bufferline_cfg,
 		opt = false,
 	}
 end

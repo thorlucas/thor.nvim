@@ -168,6 +168,7 @@ end
 M._defaults = {
 	display = true,
 	opt_default = true,
+	auto_clean = false,
 }
 
 M._autoload = function()
