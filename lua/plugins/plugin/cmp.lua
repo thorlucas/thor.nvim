@@ -10,6 +10,7 @@ end
 M.setup = function()
 	local cmp = require'cmp'
 	local luasnip = require'luasnip'
+
 	cmp.setup({
 		snippet = {
 			expand = function(args)
@@ -78,7 +79,13 @@ end
 M.use = function()
 	use { 'hrsh7th/cmp-nvim-lsp', opt = false }
 	use { 'hrsh7th/cmp-buffer', opt = false }
-	use { 'L3MON4D3/LuaSnip', opt = false }
+	use {
+		'L3MON4D3/LuaSnip',
+		config = function()
+			require('snippets').setup()
+		end,
+		opt = false,
+	}
 	use { 'saadparwaiz1/cmp_luasnip', opt = false }
 	use {
 		'hrsh7th/nvim-cmp',

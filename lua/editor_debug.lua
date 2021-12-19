@@ -65,4 +65,10 @@ M._autoload = function()
 	config.attach('debug.reload', M.define_debug_reload)
 end
 
+M.debug_snippets = function()
+	vim.cmd[[
+		au BufWritePost */snippets/*.lua lua require('plenary.reload').reload_module('snippets') require('snippets').setup()
+	]]
+end
+
 return M
