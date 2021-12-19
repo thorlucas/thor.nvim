@@ -74,15 +74,24 @@ local class = fmta([[
 	}),
 })
 
-local choicetest= c(1, {
- 	t("Ugh boring, a text node"),
- 	i(nil, "At least I can edit something now..."),
- 	f(function(args) return "Still only counts as text!!" end, {})
- })
+local cap = function(i)
+	return f(function(_, snip) return snip.captures[i] end, {})
+end
+
+local modfunc = s({
+	trig = '([%w_]+).fn',
+	regTrig = true,
+	docTrig = 'M.fn',
+	name = 'module function',
+	}, {
+		cap(1), t'.', i(1, 'fun'), t' = function(', i(2), t({')', 
+		'	'}), i(0), t({'',
+		'end'})
+})
 
 ls.snippets = {
 	lua = {
 		s('class', class),
-		s('testtrig', choicetest),
+		modfunc,
 	},
 }

@@ -29,6 +29,28 @@ local function register_plugins()
 	-- Utility
 	use { 'nvim-lua/plenary.nvim', opt = false }
 
+	-- Mine
+	-- use {
+	-- 	'~/Dev/nvim/reload.nvim',
+	-- 	opt = false,
+	-- 	config = function()
+	-- 		require('reload').pre_reload_hook = function()
+	-- 			_G.config = nil
+	-- 			_G._plugins = nil
+	-- 		end
+	-- 	end,
+	-- }
+
+
+	use {
+		'~/Dev/nvim/hihex.nvim',
+		as = 'hihex',
+		opt = false,
+		config = function()
+			return require('hihex').setup()
+		end,
+	}
+
 	-- Appearance
 	require 'plugins.theme'.setup()
 

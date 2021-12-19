@@ -31,7 +31,11 @@ M.setup = function()
 			end, { "i", "s" }),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_next_item()
+					if not cmp.get_selected_entry() and luasnip.expandable() then
+						luasnip.expand()
+					else
+						cmp.select_next_item()
+					end
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
 				else
@@ -54,13 +58,13 @@ M.setup = function()
 			{
 				name = 'nvim_lsp',
 				keyword_length = 2,
-				max_item_count = 5,
+				max_item_count = 10,
 			},
 		}, {
 			{
 				name = 'buffer',
 				keyword_length = 5,
-				max_item_count = 2,
+				max_item_count = 3,
 			},
 		}),
 		experimental = {

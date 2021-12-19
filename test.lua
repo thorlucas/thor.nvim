@@ -35,24 +35,24 @@ local hex_ns = vim.api.nvim_get_namespaces()['hex'] or vim.api.nvim_create_names
 -- Consumes a combination of hashes and and alphanumeric characters. If it is a valid
 -- hex, returns it. Always also returns the number of consumed characters.
 local match_hex = function(line)
+	local total_consumed = 0
 	local total_idx = 0
 
 	while true do
 		local idx, consumed = string.find(line, '[#%w]+')
-		if not idx then return nil end
-		idx = idx - 1
-		local len = consumed - idx
+		if not idx then
+			return nil
+		end
 		
-		local possible = string.sub(line, idx + 1, consumed)	
+		local possible = string.sub(line, idx, consumed)	
 		line = string.sub(line, consumed + 1)
 
-		total_idx = total_idx + idx
+		total_idx = total_consumed
+		total_consumed = total_consumed + consumed
 		local match = string.find(possible, '^#%x%x%x%x%x%x$')
 
 		if match then
-			return total_idx, len, possible, line
-		else
-			total_idx = total_idx + len
+			return total_idx, total_consumed, possible, line
 		end
 	end
 
@@ -74,12 +74,12 @@ local hex_handler = function(_, buf, _, start_line, old_end_line, new_end_line)
 		local c_idx = 0
 
 		while true do
-			local hex_offset, len, hex, tail = match_hex(line)
-			if not hex_offset then break end
+			local m_idx, consumed, hex, tail = match_hex(line)
+			if not m_idx then break end
 			line = tail
 
-			local hex_col, hex_line = (c_idx + hex_offset), l_idx
-			c_idx = c_idx + len
+			local hex_col, hex_line = (c_idx + m_idx), l_idx
+			c_idx = c_idx + consumed + 1
 
 			print("matched hex "..hex.." at "..vim.inspect({hex_line, hex_col}))
 
@@ -101,7 +101,7 @@ local hex_handler = function(_, buf, _, start_line, old_end_line, new_end_line)
 				vim.api.nvim_buf_set_extmark(0, hex_ns, hex_line, hex_col, {
 					hl_group = 'GlyphPalette3',
 					end_row = l_idx,
-					end_col = hex_col + len,
+					end_col = c_idx-1,
 					virt_text = {{'●', 'GlyphPalette3'}},
 					virt_text_pos = 'eol'
 				})
