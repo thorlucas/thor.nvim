@@ -1,3 +1,0 @@
-return {
-	mappings = 'which-key',
-}
