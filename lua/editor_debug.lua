@@ -71,4 +71,10 @@ M.debug_snippets = function()
 	]]
 end
 
+M.debug_hihex = function()
+	vim.cmd[[
+		au BufWritePost */hihex/*.lua lua require('plenary.reload').reload_module('hihex') require('hihex').setup()
+	]]
+end
+
 return M
