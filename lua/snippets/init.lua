@@ -86,6 +86,14 @@ local modfunc = s({
 	}
 )
 
+local mod = fmta([[
+	local M = {}
+	
+	<>
+
+	return M
+]], { i(0) })
+
 local class = fmta([[
 	---@class <>
 	local <> = {<>}
@@ -146,8 +154,8 @@ M.setup = function()
 	ls.snippets = {
 		lua = {
 			s('class', class),
+			s('mod', mod),
 			modfunc,
-			test,
 		},
 	}
 end
