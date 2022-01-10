@@ -6,6 +6,7 @@ local M = {}
 local function register_plugins()
 	use {
 		'folke/which-key.nvim',
+		disable = true,
 		config = function()
 			local wk = require('which-key')
 			wk.setup {

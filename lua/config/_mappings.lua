@@ -1,7 +1,7 @@
 -- TODO: Break this out into plugin-specific required files. Possibly we can allow the
 -- definition of the prefixes here, then just have the plugin define the actual commands
 -- to execute and the names.
-return {
+local old = {
 	{
 		{
 			-- Window 
