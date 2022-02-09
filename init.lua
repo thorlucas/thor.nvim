@@ -16,7 +16,8 @@ local luadev = require('lua-dev').setup({
 })
 local lspconf = require('lspconfig')
 lspconf.sumneko_lua.setup(luadev)
+lspconf.tsserver.setup({})
 
-require('editor_debug').debug_hihex()
+--require('editor_debug').debug_hihex()
 
 require'snippets'

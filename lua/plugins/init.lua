@@ -42,14 +42,14 @@ local function register_plugins()
 	-- }
 
 
-	use {
-		'~/Dev/nvim/hihex.nvim',
-		as = 'hihex',
-		opt = false,
-		config = function()
-			return require('hihex').setup()
-		end,
-	}
+	-- use {
+	-- 	'~/Dev/nvim/hihex.nvim',
+	-- 	as = 'hihex',
+	-- 	opt = false,
+	-- 	config = function()
+	-- 		return require('hihex').setup()
+	-- 	end,
+	-- }
 
 	-- Appearance
 	require 'plugins.theme'.setup()
