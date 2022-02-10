@@ -22,7 +22,7 @@ return {
 				-- Editor configuration
 				name = "Neovim...",
 				c = { function() require('editor_debug').reload_config() end, "Reload config" },
-				l = { function() require('reload').reload() end, "Reload all" },
+				l = { function() require('editor_debug').reload_all() end, "Reload all" },
 				e = { function() require('editor_debug').edit_config() end, "Edit config" },
 				p = { function() require('editor_debug').reload_packer() end, "Plugin sync and reload" },
 			},
@@ -30,10 +30,41 @@ return {
 				-- Find (telescope)
 				name = "Find...",
 				f = { function() require('telescope.builtin').find_files() end, "Files" },
+			},
+			q = {
+				-- LSP
+				name = "LSP...",
+				r = { function () vim.lsp.buf.rename() end, "Rename" },
+				f = { function () vim.lsp.buf.code_action() end, "Quickfix" },
+				d = { function () vim.lsp.buf.definition() end, "Definition" },
+			},
+			c = {
+				-- Commenting
+				name = "Comment...",
+				['<Space>'] = { function () require('Comment.api').toggle_current_blockwise() end, "Toggle block" },
+				c = { function () require('Comment.api').toggle_current_linewise() end, "Toggle line" },
+			},
+			['<Tab>'] = {
+				-- Tab utils
+				name = "Tab...",
+				['2'] = { function () vim.cmd [[set ts=2]] vim.cmd [[%retab!]] vim.cmd [[set ts=4]] end, "Convert from 2 spaces" },
 			}
+
 		}, {
 			mode = 'n',
 			prefix = '<leader>'
+		}
+	},
+	{
+		{
+			c = {
+				-- Commenting
+				name = "Comment...",
+				['<Space>'] = { function () require('Comment.api').toggle_blockwise_op(vim.fn.visualmode()) end, "Toggle block" },
+			},
+		}, {
+			mode = 'x',
+			prefix = '<leader>',
 		}
 	},
 	{

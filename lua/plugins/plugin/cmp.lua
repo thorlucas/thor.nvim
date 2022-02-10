@@ -10,6 +10,7 @@ end
 M.setup = function()
 	local cmp = require'cmp'
 	local luasnip = require'luasnip'
+	local autopairs = require('nvim-autopairs.completion.cmp')
 
 	cmp.setup({
 		snippet = {
@@ -58,7 +59,6 @@ M.setup = function()
 			{ name = 'luasnip' },
 			{
 				name = 'nvim_lsp',
-				keyword_length = 2,
 				max_item_count = 10,
 			},
 		}, {
@@ -67,18 +67,24 @@ M.setup = function()
 				keyword_length = 5,
 				max_item_count = 3,
 			},
+			{ name = 'path', }
 		}),
 		experimental = {
 			ghost_text = true,
 			native_menu = true,
 		},
 	})
+
+	cmp.event:on('confirm_done', autopairs.on_confirm_done({
+		map_char = { tex = '' },
+	}))
 end
 
 
 M.use = function()
 	use { 'hrsh7th/cmp-nvim-lsp', opt = false }
 	use { 'hrsh7th/cmp-buffer', opt = false }
+	use { 'hrsh7th/cmp-path', opt = false }
 	use {
 		'L3MON4D3/LuaSnip',
 		config = function()

@@ -54,6 +54,21 @@ local function register_plugins()
 	-- Appearance
 	require 'plugins.theme'.setup()
 
+	use {
+		'stevearc/dressing.nvim',
+		config = function ()
+			require('dressing').setup({
+				select = {
+					backend = { "telescope", "nui" },
+					telescope = {
+						theme = "cursor",
+					},
+				},
+			});
+		end,
+		opt = false,
+	}
+
 	-- Managers (e.g. keymap managers)
 	require 'plugins.managers'.setup()
 
@@ -89,8 +104,29 @@ local function register_plugins()
 		opt = false,
 	}
 
+
 	use {
 		'folke/lua-dev.nvim',
+		opt = false,
+	}
+
+	use {
+		'jose-elias-alvarez/nvim-lsp-ts-utils',
+		opt = false,
+		requires = { 'nvim-lua/plenary.nvim' },
+	}
+
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup({
+				mappings = {
+					basic = false,
+					extra = false,
+					extended = false,
+				},
+			})
+		end,
 		opt = false,
 	}
 
@@ -110,7 +146,13 @@ local function register_plugins()
 			require('nvim-treesitter.configs').setup {
 				highlight = {
 					enable = true,
-					disable = { 'rust', 'lua' },
+					disable = { 'rust' },
+				},
+				autotag = {
+					enable = true,
+					filetypes = { 
+						'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript'
+					},
 				},
 				textobjects = {
 					select = {
@@ -151,6 +193,21 @@ local function register_plugins()
 		opt = false,
 	}
 
+	use {
+		'windwp/nvim-autopairs',
+		opt = false,
+		config = function ()
+			require('nvim-autopairs').setup({})
+		end
+	}
+
+	use {
+		'windwp/nvim-ts-autotag',
+		opt = false,
+		config = function ()
+			require('nvim-ts-autotag').setup()
+		end
+	}
 	
 	-- TODO: Temporary
 	-- Register listeners

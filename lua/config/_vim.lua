@@ -17,8 +17,9 @@ return {
 
 		---- FOLDS ----
 		-- commented out because I want to get LSP folding
-		-- foldlevel = 20,
-		-- foldmethod = "syntax",
+		foldlevel = 20,
+		foldmethod = "expr",
+		foldexpr = "nvim_treesitter#foldexpr()",
 
 
 		---- APPEARANCE -----
