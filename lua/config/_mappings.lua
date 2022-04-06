@@ -37,6 +37,7 @@ return {
 				r = { function () vim.lsp.buf.rename() end, "Rename" },
 				f = { function () vim.lsp.buf.code_action() end, "Quickfix" },
 				d = { function () vim.lsp.buf.definition() end, "Definition" },
+				m = { function () require('nvim-lsp-ts-utils').rename_file() end, "[TS] Rename file" },
 			},
 			c = {
 				-- Commenting

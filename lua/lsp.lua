@@ -19,7 +19,6 @@ M._autoload = function()
 			ts_utils.setup({
 				update_imports_on_move = true,
 			})
-
 			ts_utils.setup_client(client)
 		end
 	})
@@ -27,6 +26,20 @@ M._autoload = function()
 	lspconf.eslint.setup({})
 
 	lspconf.tailwindcss.setup({})
+
+	lspconf.hls.setup({})
+
+	lspconf.rust_analyzer.setup({
+		cmd = { 'rustup', 'run', 'nightly', 'rust-analyzer' },
+	})
+
+	--lspconf.theme_check.setup({})
+
+	lspconf.pyright.setup({})
+
+	lspconf.theme_check.setup({
+		cmd = { 'shopify', 'theme', 'language-server' },
+	})
 
 	vim.diagnostic.config({
 		virtual_text = {
