@@ -71,7 +71,9 @@ M.setup = function()
 		}),
 		experimental = {
 			ghost_text = true,
-			native_menu = true,
+		},
+		view = {
+			entries = 'native',
 		},
 	})
 

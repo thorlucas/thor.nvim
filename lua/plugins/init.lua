@@ -203,7 +203,8 @@ local function register_plugins()
 
 	use {
 		'windwp/nvim-ts-autotag',
-		opt = false,
+		--opt = false,
+		disable = true,
 		config = function ()
 			require('nvim-ts-autotag').setup()
 		end

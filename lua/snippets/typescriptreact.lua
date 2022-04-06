@@ -1,5 +1,4 @@
 local ls = require("luasnip")
-local Node = require("luasnip.nodes.node").Node
 
 -- [Docs](https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md)
 
@@ -27,43 +26,12 @@ local conds = require("luasnip.extras.expand_conditions")
 
 local M = {}
 
-M.setup = function()
-	ls.config.setup({
-		ext_opts = {
-			[types.choiceNode] = {
-				active = {
-					virt_text = {{"●", "GlyphPalette3"}},
-					hl_mode = 'combine',
-				},
-				passive = {
-					virt_text = {{"●", "GlyphPalette7"}},
-					hl_mode = 'combine',
-				}
-			},
-			[types.insertNode] = {
-				active = {
-					virt_text = {{"●", "GlyphPalette4"}},
-					hl_mode = 'combine',
-				},
-				passive = {
-					virt_text = {{"●", "GlyphPalette7"}},
-					hl_mode = 'combine',
-				},
-			},
-			
-
-		},
-		ext_base_prio = 200,
-		ext_prio_increase = 3,
-		updateevents = 'TextChanged,TextChangedI',
-		delete_check_events = 'InsertLeave',
-		region_check_events = 'InsertEnter',
+table.insert(M, s('fc', {
+	fmt('const {}: {} = {}', {
+		i(1),
+		i(2),
+		i(0),
 	})
-
-	ls.snippets = {
-		lua = require('snippets.lua'),
-		typescriptreact = require('snippets.typescriptreact'),
-	}
-end
+}))
 
 return M
