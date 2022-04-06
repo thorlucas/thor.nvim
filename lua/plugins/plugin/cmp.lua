@@ -69,9 +69,12 @@ M.setup = function()
 			},
 			{ name = 'path', }
 		}),
+		view = {
+			entries = "native",
+		},
 		experimental = {
 			ghost_text = true,
-			native_menu = true,
+			--native_menu = true,
 		},
 	})
 
