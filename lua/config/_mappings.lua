@@ -72,16 +72,25 @@ return {
 		{
 			['jk'] = { '<Esc>', "Exit insert mode" },
 		}, {
-			mode = 'i'
+			mode = 'i',
 		}
 	},
 	{
 		{
 			['jk'] = { '<Esc>', "Exit visual mode" },
 		}, {
-			mode = 'v'
+			mode = 'v',
 		}
 	},
+	-- Doesn't work for some reason
+	-- {
+	-- 	{
+	-- 		['<Esc>'] = { [[<C-\><C-n>]], "Exit terminal mode" },
+	-- 	}, {
+	-- 		mode = 't',
+	-- 		prefix = '',
+	-- 	},
+	-- },
 	{
 		-- Treesitter text objects
 		-- TODO: Sync somehow with initialization

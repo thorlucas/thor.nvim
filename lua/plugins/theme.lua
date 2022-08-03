@@ -39,6 +39,7 @@ local catppuccin_cfg = function()
 		},
 	})
 	vim.cmd[[colorscheme catppuccin]]
+	vim.cmd[[hi Comment gui=NONE]]
 end
 
 local lualine_cfg = function()
@@ -58,10 +59,7 @@ end
 
 _G.reload_catppuccin = function()
 	require('plenary.reload').reload_module('catppuccin')
-	require('plenary.reload').reload_module('lualine')
-	require('plenary.reload').reload_module('bufferline')
-	catppuccin_cfg()
-	lualine_cfg()
+	require('plenary.reload').reload_module('lualine') require('plenary.reload').reload_module('bufferline') catppuccin_cfg() lualine_cfg()
 	bufferline_cfg()
 end
 
@@ -73,8 +71,8 @@ local function register_plugins()
 	}
 
 	use_theme {
-		'~/Dev/nvim/catppuccin',
-		--'catppuccin/nvim',
+		--'~/Dev/nvim/catppuccin',
+		'catppuccin/nvim',
 		as = 'catppuccin',
 		config = catppuccin_cfg,
 	}

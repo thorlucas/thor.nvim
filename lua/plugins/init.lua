@@ -137,6 +137,12 @@ local function register_plugins()
 	}
 
 	use {
+		'fladson/vim-kitty',
+		opt = false,
+		ft = { 'conf', 'kitty' },
+	}
+
+	use {
 		'numToStr/Comment.nvim',
 		config = function()
 			require('Comment').setup({
